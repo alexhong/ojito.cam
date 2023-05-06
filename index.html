@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
+<title>ojito.cam</title>
+<style>
+body {
+	margin-bottom: 3em;
+	text-align: center;
+	color: #fff;
+	background: #808080;
+	font: 40px/40px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-shadow: 0 0.05em 0.1em rgba(0,0,0,0.2);
+}
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+h1 {
+	font-weight: normal;
+}
+h1, li, p {
+	margin: 2em 0.5em;
+}
+li {
+	line-height: 0;
+}
+li a {
+	display: inline-block;
+	max-width: 100%;
+	border: 0.2em solid #fff;
+	box-shadow: 0 0.05em 0.1em rgba(0,0,0,0.2);
+}
+@media only screen and (max-width: 480px) { 
+	li a { 
+		border-width: 0.1em;
+	} 
+}
+li a img {
+	display: block;
+	max-width: 100%;
+}
+p.more a {
+	padding: 0em 0.4em 0.6em;
+	color: inherit;
+	font-size: 50px;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 100%;
+}
+p.more a:hover {
+	background: #606060;
+}
+</style>
+</head>
+
+<body>
+<ul id="photos"></ul>
+<p class="more"><a href="https://www.flickr.com/photos/ojitocam/">&hellip;</a></p>
+<script>
+function jsonFlickrFeed(feed) {
+	for (const item of feed.items) {
+
+		var img = document.createElement('img');
+		var jpg = item.media.m.slice(0,-5)+'c_d.jpg';
+		img.setAttribute('src',jpg);
+
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.setAttribute('href',item.link);
+
+		a.appendChild(img);
+		li.appendChild(a);
+		document.getElementById('photos').appendChild(li);
+
+	}
+}
+</script>
+<script type="text/javascript" src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
+</body>
+
+</html>

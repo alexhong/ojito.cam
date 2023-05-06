@@ -25,30 +25,45 @@ h1 {
 h1, li, p {
 	margin: 2em 0.5em;
 }
-li {
-	line-height: 0;
+a {
+	color: inherit;
+	text-decoration: none;
 }
 li a {
 	display: inline-block;
 	max-width: 100%;
+	background: blue;
+}
+li img {
+	display: block;
+	max-width: 100%;
+	box-sizing: border-box;
 	border: 0.2em solid #fff;
 	box-shadow: 0 0.05em 0.1em rgba(0,0,0,0.2);
 }
+li span { 
+	display: block;
+	font-size: 16px; 
+	opacity: 0.5;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+}
+li a:hover span {
+	opacity: 1;
+}
 @media only screen and (max-width: 480px) { 
-	li a { 
+	li img { 
 		border-width: 0.1em;
 	} 
-}
-li a img {
-	display: block;
-	max-width: 100%;
+	li span {
+		font-size: 12px;
+		line-height: 30px;
+	}
 }
 p.more a {
 	padding: 0em 0.4em 0.6em;
-	color: inherit;
 	font-size: 50px;
 	font-weight: bold;
-	text-decoration: none;
 	border-radius: 100%;
 }
 p.more a:hover {
@@ -65,14 +80,17 @@ function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
 
 		var img = document.createElement('img');
-		var jpg = item.media.m.slice(0,-5)+'c_d.jpg';
-		img.setAttribute('src',jpg);
+		img.setAttribute('src',item.media.m.slice(0,-5)+'c_d.jpg');
 
-		var li = document.createElement('li');
+		var date = document.createElement('span');
+		date.textContent = item.date_taken.slice(0,10).replaceAll('-','.');
+
 		var a = document.createElement('a');
 		a.setAttribute('href',item.link);
-
 		a.appendChild(img);
+		a.appendChild(date);
+
+		var li = document.createElement('li');
 		li.appendChild(a);
 		document.getElementById('photos').appendChild(li);
 

@@ -72,7 +72,7 @@ function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
 
 		var img = document.createElement('img');
-		img.setAttribute('src',item.media.m.slice(0,-5)+'c_d.jpg');
+		img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
 
 		var date = document.createElement('span');
 		date.textContent = item.date_taken.slice(0,10).replaceAll('-','.');

@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Courier Prime Sans';
+    src: url('cps.woff2') format('woff2'),
+         url('cps.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*
+@font-face {
+    font-family: 'Courier Prime Sans';
+    src: url('cps-i.woff2') format('woff2'),
+         url('cps-i.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Courier Prime Sans';
+    src: url('cps-b.woff2') format('woff2'),
+         url('cps-b.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Courier Prime Sans';
+    src: url('cps-bi.woff2') format('woff2'),
+         url('cps-bi.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+*/

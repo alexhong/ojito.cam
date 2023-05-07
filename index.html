@@ -28,40 +28,42 @@ a {
 }
 li a {
 	display: inline-block;
+	color: #c0c0c0;
+}
+li a:hover {
+	color: #fff;
 }
 li a>* {
 	display: block;
-	opacity: 0.5;
 }
-li img,
-li a:hover>* {
-	opacity: 1;
-}
-li img {
+img {
 	box-sizing: border-box;
 	max-width: 100%;
 	max-height: 85vh;
 	border: 4px solid #fff;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-li time { 
+time, span {
+	padding: 0 4px;
+}
+time { 
 	text-align: left;
 	float: left;
 }
-li span {
+span {
 	text-align: right;
 	float: none;
 }
-p.more {
+.more {
 	padding-bottom: 80px;
 }
-p.more a {
+.more a {
 	padding: 0 0.3em 0.5em;
 	font: bold 48px 'Times New Roman', serif;
-	text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	border-radius: 100%;
 }
-p.more a:hover {
+.more a:hover {
 	background: #606060;
 }
 </style>
@@ -82,16 +84,16 @@ function jsonFlickrFeed(feed) {
 		time.setAttribute('datetime',timestamp);
 		time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
-		var cam = document.createElement('span');
+		var span = document.createElement('span');
 		var model = item.tags.split(' ')[1]
 			.replace('dmcsz1','DMC-SZ1')
 			.replace('griiix','GR IIIx')
 		;
-		cam.textContent = model;
+		span.textContent = model;
 
 		var a = document.createElement('a');
 		a.setAttribute('href',item.link);
-		a.append(img,time,' ',cam);
+		a.append(img,time,' ',span);
 
 		var li = document.createElement('li');
 		li.append(a);

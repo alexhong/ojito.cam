@@ -14,32 +14,31 @@
 	-webkit-text-size-adjust: 100%;
 }
 body {
-	color: #fff;
+	color: #c0c0c0;
 	background: #808080;
 	font: 16px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
+	padding: 80px 20px 140px;
 }
-li, p {
-	margin: 80px 20px;
-}
-a {
-	color: inherit;
+a { 
 	text-decoration: none;
+	color: inherit;
+}
+a:focus,
+a:hover {
+	color: #fff; 
 }
 li {
-	display: block;
-	padding-bottom: 4px;
+	line-height: 0;
 }
-li a {
+div {
 	display: inline-block;
-	color: #c0c0c0;
 	text-align: left;
+	text-shadow: 0 -1px 0 #606060;
+	line-height: 20px;
+	padding-bottom: 72px;
 }
-a:hover time,
-cite[title]:hover {
-	color: #fff;
-}
-a img {
+div img {
 	display: block;
 	box-sizing: border-box;
 	max-width: 100%;
@@ -47,30 +46,40 @@ a img {
 	border: 4px solid #fff;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-a div {
-	padding: 8px 4px;
-	text-shadow: 0 -1px 0 #606060;
-}
-cite { 
-	float: right;
-	font-style: normal;
-	padding: 8px 4px;
-	margin: -8px -4px;
-}
-cite[title] {
-	cursor: help;
-}
-time {
+div a,
+div i {
 	display: block;
+	padding: 0 4px;
 }
-.more {
-	padding-bottom: 80px;
+div a {
+	padding-top: 8px;
+}
+div .perma {
+	float: left;
+}
+div .perma:hover {
+	background: url(icons/link.gif) right 63% no-repeat;
+	background-size: 15px 12px;
+	padding-right: 20px;
+}
+div .db {
+	float: right;
+}
+div .db:hover {
+	background: url(icons/camera.gif) left 63% no-repeat;
+	background-size: 15px 12px;
+	padding-left: 20px;
+}
+div i {
+	font-style: normal;
+	clear: both;
 }
 .more a {
-	padding: 0 0.3em 0.5em;
+	padding: 0 15px 25px;
 	font: bold 48px 'Times New Roman', serif;
 	text-shadow: 0 1px 4px rgba(0,0,0,0.1);
 	border-radius: 100%;
+	color: #fff;
 }
 .more a:hover {
 	background: #606060;
@@ -85,40 +94,44 @@ time {
 function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
 
+		const $div = document.createElement('div');
 		const $img = document.createElement('img');
 		$img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
-
-		const $div = document.createElement('div');
+		$div.append($img);
 
 		const $time = document.createElement('time');
 		const timestamp = item.date_taken;
 		$time.setAttribute('datetime',timestamp);
 		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
-		let model = '', info = '';
+		const _perma = document.createElement('a')
+		_perma.className = 'perma';
+		_perma.setAttribute('href',item.link);
+		_perma.append($time);
+		$div.append(_perma);
+
+		let model = '', url = '';
 		switch(item.tags.split(' ')[1]) {
-			case 'dmcsz1':
-			model = 'DMC-SZ1'; info = 'Panasonic DMC-SZ1\n1/2.33" · CCD · 2012'; break;
-			case 'griiix':
-			model = 'GR IIIx'; info = 'Ricoh GR IIIx\nAPS-C · CMOS · 2021'; break;
+			case 'dmcsz1': model = 'DMC-SZ1'; url = 'panasonic_lumix-dmc-sz1'; break;
+			case 'griiix': model = 'GR IIIx'; url = 'ricoh_gr-iiix'; break;
 		}
 		if (model) {
-			const $cite = document.createElement('cite');
-			$cite.textContent = model;
-			if (info) $cite.setAttribute('title',info);
-			$div.append($cite,' ');
+			const _db = document.createElement('a');
+			_db.className = 'db';
+			_db.setAttribute('href','https://www.digicamdb.com/specs/'+url+'/');
+			_db.textContent = model;
+			$div.append(' ',_db);
 		}
 
-		$div.append($time,' ',item.title);
-
-		const $a = document.createElement('a');
-		$a.setAttribute('href',item.link);
-		$a.append($img,$div);
+		if (item.title.trim()){
+			$i = document.createElement('i');
+			$i.textContent = item.title;
+			$div.append(' ',$i);
+		}
 
 		const $li = document.createElement('li');
-		$li.append($a);
+		$li.append($div);
 		document.getElementById('photos').append($li);
-
 	}
 }
 </script>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
 <title>ojito.cam</title>
-<link rel="stylesheet" href="cps/stylesheet.css" type="text/css" charset="utf-8"/>
+<link rel="stylesheet" href="cps/stylesheet.css" type="text/css">
 <style>
 * { 
 	margin: 0; 
@@ -114,6 +114,7 @@ function jsonFlickrFeed(feed) {
 		const $div = document.createElement('div');
 		const $img = document.createElement('img');
 		$img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
+		$img.setAttribute('alt','');
 		$div.append($img);
 
 		const $time = document.createElement('time');
@@ -160,7 +161,8 @@ function jsonFlickrFeed(feed) {
 	}
 }
 </script>
-<script type="text/javascript" src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
+<script>const rendered = document.getElementById('photos').innerHTML;</script>
 </body>
 
 </html>

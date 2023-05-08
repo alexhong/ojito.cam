@@ -87,18 +87,18 @@ div p {
 	font-style: normal;
 	clear: both;
 }
-.more {
+body>p {
 	padding: 60px 0 120px;
 }
-.more a {
+#more {
 	padding: 0 15px 25px;
 	font: bold 48px 'Times New Roman', serif;
 	text-shadow: 0 1px 4px rgba(0,0,0,0.1);
 	border-radius: 100%;
 	color: #fff;
 }
-.more a:hover,
-.more a:focus {
+#more:hover,
+#more:focus {
 	background: #606060;
 }
 </style>
@@ -106,8 +106,9 @@ div p {
 
 <body>
 <ul id="photos"></ul>
-<p class="more"><a href="https://www.flickr.com/photos/ojitocam/">&hellip;</a></p>
+<p><a id="more" href="static.html">&hellip;</a></p>
 <script>
+document.getElementById('more').setAttribute('href','https://www.flickr.com/photos/ojitocam/');
 function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
 

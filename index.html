@@ -24,8 +24,8 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
-a:focus,
-a:hover {
+a:hover,
+a:focus {
 	color: #fff; 
 }
 li {
@@ -56,18 +56,22 @@ div a {
 }
 div .perma {
 	float: left;
-}
-div .perma:hover {
-	background: url(icons/link.gif) right 63% no-repeat;
+	background: url(icons/link.gif) -100em -100em no-repeat;
 	background-size: 15px 12px;
+}
+div .perma:hover,
+div .perma:focus {
+	background-position: right 63%;
 	padding-right: 20px;
 }
 div .db {
 	float: right;
-}
-div .db:hover {
-	background: url(icons/camera.gif) left 63% no-repeat;
+	background: url(icons/camera.gif) -100em -100em no-repeat;
 	background-size: 15px 12px;
+}
+div .db:hover,
+div .db:focus {
+	background-position: left 63%;
 	padding-left: 20px;
 }
 div i {
@@ -81,7 +85,8 @@ div i {
 	border-radius: 100%;
 	color: #fff;
 }
-.more a:hover {
+.more a:hover,
+.more a:focus {
 	background: #606060;
 }
 </style>

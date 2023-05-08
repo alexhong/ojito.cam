@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
+<title>ojito.cam</title>
+<link rel="stylesheet" href="cps/stylesheet.css" type="text/css" charset="utf-8"/>
+<style>
+* { 
+	margin: 0; 
+	padding: 0; 
+	list-style: none;
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	color: #c0c0c0;
+	background: #808080;
+	font: 16px/20px 'Courier Prime Sans', Courier, monospace;
+	text-align: center;
+	padding: 80px 20px 140px;
+}
+a { 
+	text-decoration: none;
+	color: inherit;
+}
+a:hover,
+a:focus {
+	color: #fff; 
+}
+li {
+	line-height: 0;
+}
+div {
+	display: inline-block;
+	text-align: left;
+	text-shadow: 0 -1px 0 #606060;
+	line-height: 20px;
+	padding-bottom: 72px;
+}
+div img {
+	display: block;
+	box-sizing: border-box;
+	max-width: 100%;
+	max-height: 85vh;
+	border: 4px solid #fff;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+div a,
+div i {
+	display: block;
+	padding: 0 4px;
+}
+div a {
+	padding-top: 8px;
+}
+div .perma {
+	float: left;
+	background: rgba(255,0,0,0.5) url(icons/link.gif) -100em -100em no-repeat;
+	background-size: 15px 12px;
+}
+div .perma:hover,
+div .perma:focus {
+	background-position: right 63%;
+	padding-right: 20px;
+}
+div .db {
+	float: right;
+	background: rgba(255,0,0,0.5) url(icons/camera.gif) -100em -100em no-repeat;
+	background-size: 15px 12px;
+}
+div .db:hover,
+div .db:focus {
+	background-position: left 63%;
+	padding-left: 20px;
+}
+div i {
+	font-style: normal;
+	clear: both;
+}
+.more a {
+	padding: 0 15px 25px;
+	font: bold 48px 'Times New Roman', serif;
+	text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+	border-radius: 100%;
+	color: #fff;
+}
+.more a:hover,
+.more a:focus {
+	background: #606060;
+}
+</style>
+</head>
+
+<body>
+<ul id="photos"></ul>
+<p class="more"><a href="https://www.flickr.com/photos/ojitocam/">&hellip;</a></p>
+<script>
+function jsonFlickrFeed(feed) {
+	for (const item of feed.items) {
+
+		const $div = document.createElement('div');
+		const $img = document.createElement('img');
+		$img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
+		$div.append($img);
+
+		const $time = document.createElement('time');
+		const timestamp = item.date_taken;
+		$time.setAttribute('datetime',timestamp);
+		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
+
+		const _perma = document.createElement('a')
+		_perma.className = 'perma';
+		_perma.setAttribute('href',item.link);
+		_perma.append($time);
+		$div.append(_perma);
+
+		let model = '', url = '';
+		switch(item.tags.split(' ')[1]) {
+			case 'dmcsz1': model = 'DMC-SZ1'; url = 'panasonic_lumix-dmc-sz1'; break;
+			case 'griiix': model = 'GR IIIx'; url = 'ricoh_gr-iiix'; break;
+		}
+		if (model) {
+			const _db = document.createElement('a');
+			_db.className = 'db';
+			_db.setAttribute('href','https://www.digicamdb.com/specs/'+url+'/');
+			_db.textContent = model;
+			$div.append(' ',_db);
+		}
+
+		if (item.title.trim()){
+			$i = document.createElement('i');
+			$i.textContent = item.title;
+			$div.append(' ',$i);
+		}
+
+		const $li = document.createElement('li');
+		$li.append($div);
+		document.getElementById('photos').append($li);
+	}
+}
+</script>
+<script type="text/javascript" src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
+</body>
+
+</html>

@@ -56,21 +56,19 @@ div a {
 }
 div .perma {
 	float: left;
-	background: url(icons/link.gif) -100em -100em no-repeat;
-	background-size: 15px 15px;
 }
-div .perma:hover {
-	background-position: right 67%;
-	padding-right: 20px;
+div .perma:hover:after,
+div .perma:focus:after {
+	content: '#';
+	margin-left: 5px;
 }
 div .db {
 	float: right;
-	background: url(icons/camera.gif) -100em -100em no-repeat;
-	background-size: 15px 15px;
 }
-div .db:hover {
-	background-position: left 67%;
-	padding-left: 20px;
+div .db:hover:before,
+div .db:focus:before {
+	content: '?';
+	margin-right: 5px;
 }
 div i {
 	font-style: normal;

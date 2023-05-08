@@ -52,7 +52,7 @@ div i {
 	padding: 0 4px;
 }
 div a {
-	/*padding-top: 8px;*/
+	padding-top: 8px;
 }
 div .perma {
 	float: left;
@@ -61,18 +61,21 @@ div .perma {
 }
 div .perma,
 div .perma {
-	background-position: right 14%;
+	background-position: right;
 	padding-right: 20px;
 }
 div .db {
 	float: right;
-	background: rgba(255,0,0,0.5) url(icons/camera2.gif) -100em -100em no-repeat;
-	background-size: 15px 15px;
 }
-div .db,
-div .db {
-	background-position: left 14%;
-	padding-left: 20px;
+div .db:before {
+	content: url(icons/camera.gif);
+	display: block;
+	height: 0;
+	width: 0;
+	position: relative;
+	top: 2px;
+	left: -20px;
+	transform: scale(0.25);
 }
 div i {
 	font-style: normal;

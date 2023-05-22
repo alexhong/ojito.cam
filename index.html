@@ -131,9 +131,11 @@ function jsonFlickrFeed(feed) {
 
 		let model = '', url = '';
 		switch(item.tags.split(' ')[1]) {
-			case 'dmcfz35': model = 'DMC-FZ35'; url = 'panasonic_lumix-dmc-fz35'; break;
-			case 'dmcsz1': model = 'DMC-SZ1'; url = 'panasonic_lumix-dmc-sz1'; break;
-			case 'griiix': model = 'GR IIIx'; url = 'ricoh_gr-iiix'; break;
+			case 'dmcfz35': model = 'DMC-FZ35'; url = 'panasonic_lumix-dmc-fz35'; 	break;
+			case 'dmclx2': 	model = 'DMC-LX2'; 	url = 'panasonic_lumix-dmc-lx2'; 	break;
+			case 'dmcsz1': 	model = 'DMC-SZ1'; 	url = 'panasonic_lumix-dmc-sz1'; 	break;
+			case 'griiix': 	model = 'GR IIIx'; 	url = 'ricoh_gr-iiix'; 				break;
+			case 's95': 	model = 'S95'; 		url = 'canon_powershot-s95'; 		break;
 		}
 		if (model) {
 			const _db = document.createElement('a');

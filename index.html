@@ -148,9 +148,17 @@ function jsonFlickrFeed(feed) {
 			$div.append(' ',_db);
 		}
 
-		if (item.title.trim()){
+		let t = item.title.trim();
+		if (t) {
 			$i = document.createElement('i');
-			$i.textContent = item.title;
+			if (t[0] == '@') {
+				$a = document.createElement('a');
+				$a.setAttribute('href','https://www.instagram.com/'+t.slice(1)+'/');
+				$a.textContent = t;
+				$i.append($a);
+			} else {
+				$i.textContent = t;
+			}
 			$div.append(' ',$i);
 		}
 
@@ -159,7 +167,7 @@ function jsonFlickrFeed(feed) {
 		document.getElementById('photos').append($li);
 
 		const p = item.description.split('<p>');
-		if (p.length > 3) {
+		if (p.length > 3 && p[3].trim() != '</p>') {
 			$li = document.createElement('li');
 			$li.innerHTML = '<p>'+p[3];
 			document.getElementById('photos').append($li);

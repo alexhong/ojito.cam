@@ -13,7 +13,9 @@
 <ul id="photos"></ul>
 <p><a id="more" href="static.html">&hellip;</a></p>
 <script>
+const $photos = document.getElementById('photos');	
 document.getElementById('more').setAttribute('href','https://www.flickr.com/photos/ojitocam/');
+
 function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
 
@@ -41,26 +43,27 @@ function jsonFlickrFeed(feed) {
 			case 'dmcfz35': model = 'DMC-FZ35'; break;
 			case 'dmclx2': 	model = 'DMC-LX2'; 	break;
 			case 'dmcsz1': 	model = 'DMC-SZ1'; 	break;
+			case 'dsct20': 	model = 'DSC-T20'; 	break;
 			case 'griiix': 	model = 'GR IIIx'; 	break;
 			case 'l4v': 	model = 'L4V';		break;
 			case 's95': 	model = 'S95'; 		break;
 		}
 		if (model) {
-			const _db = document.createElement('a');
-			_db.className = 'db';
-			_db.setAttribute('href',url);
-			_db.textContent = model;
-			$div.append(' ',_db);
+			const _cam = document.createElement('a');
+			_cam.className = 'dp';
+			_cam.setAttribute('href',url);
+			_cam.textContent = model;
+			$div.append(' ',_cam);
 		}
 
-		let t = item.title.trim();
+		const t = item.title.trim();
 		if (t) {
 			$i = document.createElement('i');
 			if (t[0] == '@') {
-				$a = document.createElement('a');
-				$a.setAttribute('href','https://www.instagram.com/'+t.slice(1)+'/');
-				$a.textContent = t;
-				$i.append($a);
+				const _ig = document.createElement('a');
+				_ig.setAttribute('href','https://www.instagram.com/'+t.slice(1)+'/');
+				_ig.textContent = t;
+				$i.append(_ig);
 			} else {
 				$i.textContent = t;
 			}
@@ -69,13 +72,13 @@ function jsonFlickrFeed(feed) {
 
 		let $li = document.createElement('li');
 		$li.append($div);
-		document.getElementById('photos').append($li);
+		$photos.append($li,'\n');
 
 		const p = item.description.split('<p>');
 		if (p.length > 3 && p[3].trim() != '</p>') {
 			$li = document.createElement('li');
-			$li.innerHTML = '<p>'+p[3];
-			document.getElementById('photos').append($li);
+			$li.innerHTML = '<p>'+p[3].trim();
+			$photos.append($li,'\n');
 		}
 
 	}
@@ -85,8 +88,9 @@ function jsonFlickrFeed(feed) {
 <script src="smartquotes.js"></script>
 <script>
 	if (window.location.hash.substr(1) == 'x') {
-		const rendered = document.getElementById('photos').innerHTML;
+		const rendered = $photos.innerHTML;
 		document.body.innerHTML = '<textarea>'+rendered+'</textarea>';
+		document.body.childNodes[0].select();
 	} else {
 		smartquotes();
 	}

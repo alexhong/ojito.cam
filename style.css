@@ -7,14 +7,17 @@
 body {
 	color: #c0c0c0;
 	background: #808080;
-	font: 16px/20px 'Courier Prime Sans', Courier, monospace;
+	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px;
 }
 textarea {
-	font: inherit;
+	font: 12px/15px 'Courier Prime Sans', Courier, monospace;
 	width: 100%;
 	height: 80vh;
+	padding: 5px;
+	box-sizing: border-box;
+	white-space: nowrap;
 }
 a { 
 	text-decoration: none;
@@ -70,11 +73,11 @@ div .perma:focus:after {
 	content: '#';
 	margin-left: 5px;
 }
-div .db {
+div .cam {
 	float: right;
 }
-div .db:hover:before,
-div .db:focus:before {
+div .cam:hover:before,
+div .cam:focus:before {
 	content: '?';
 	margin-right: 5px;
 }
@@ -82,6 +85,10 @@ div i,
 div p {
 	font-style: normal;
 	clear: both;
+}
+div i a {
+	padding: 0 4px;
+	margin: 0 -4px;
 }
 body>p {
 	padding: 60px 0 120px;

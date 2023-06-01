@@ -34,7 +34,21 @@ function jsonFlickrFeed(feed) {
 		_perma.className = 'perma';
 		_perma.setAttribute('href',item.link);
 		_perma.append($time);
-		$div.append(_perma);
+		$div.append(' ',_perma);
+
+		const title = item.title.trim();
+		if (title) {
+			const $cite = document.createElement('cite');
+			if (title[0] == '@') {
+				const _ig = document.createElement('a');
+				_ig.setAttribute('href','https://www.instagram.com/'+title.slice(1)+'/');
+				_ig.textContent = title;
+				$cite.append(_ig);
+			} else {
+				$cite.textContent = title;
+			}
+			$div.append(' ',$cite);
+		}
 
 		let brand = item.tags.split(' ')[0], 
 			model = item.tags.split(' ')[1], 
@@ -54,20 +68,6 @@ function jsonFlickrFeed(feed) {
 			_cam.setAttribute('href',url);
 			_cam.textContent = model;
 			$div.append(' ',_cam);
-		}
-
-		const t = item.title.trim();
-		if (t) {
-			$i = document.createElement('i');
-			if (t[0] == '@') {
-				const _ig = document.createElement('a');
-				_ig.setAttribute('href','https://www.instagram.com/'+t.slice(1)+'/');
-				_ig.textContent = t;
-				$i.append(_ig);
-			} else {
-				$i.textContent = t;
-			}
-			$div.append(' ',$i);
 		}
 
 		let $li = document.createElement('li');

@@ -89,8 +89,7 @@ function jsonFlickrFeed(feed) {
 <script>
 	if (window.location.hash.substr(1) == 'x') {
 		const rendered = $photos.innerHTML;
-		document.body.innerHTML = '<textarea>'+rendered+'</textarea>';
-		document.body.childNodes[0].select();
+		document.body.innerHTML = '<textarea onClick="this.setSelectionRange(0,this.value.length)">'+rendered+'</textarea>';
 	} else {
 		smartquotes();
 	}

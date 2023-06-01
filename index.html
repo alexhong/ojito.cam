@@ -84,12 +84,11 @@ function jsonFlickrFeed(feed) {
 <script src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
 <script src="smartquotes.js"></script>
 <script>
-	smartquotes();
 	if (window.location.hash.substr(1) == 'x') {
-		const $textarea = document.createElement('textarea');
-		$textarea.append(document.getElementById('photos').innerHTML);
-		document.body.innerHTML = '';
-		document.body.append($textarea);
+		const rendered = document.getElementById('photos').innerHTML;
+		document.body.innerHTML = '<textarea>'+rendered+'</textarea>';
+	} else {
+		smartquotes();
 	}
 </script>
 </body>

@@ -12,9 +12,8 @@ body {
 	padding: 20px;
 }
 textarea {
-	font: 12px/15px 'Courier Prime Sans', Courier, monospace;
+	font: 10px/15px Menlo, monospace;
 	width: 100%;
-	height: 80vh;
 	padding: 5px;
 	box-sizing: border-box;
 	white-space: nowrap;

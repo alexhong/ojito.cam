@@ -87,9 +87,10 @@ function jsonFlickrFeed(feed) {
 <script src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
 <script src="smartquotes.js"></script>
 <script>
-	if (window.location.hash.substr(1) == 'x') {
-		const rendered = $photos.innerHTML;
-		document.body.innerHTML = '<textarea onClick="this.setSelectionRange(0,this.value.length)">'+rendered+'</textarea>';
+	if (window.location.search == '?o') {
+		let output = $photos.innerHTML,
+			lines = output.split('\n').length;
+		document.body.innerHTML = '<textarea rows="'+lines+'" onClick="this.setSelectionRange(0,this.value.length)">'+output+'</textarea>';
 	} else {
 		smartquotes();
 	}

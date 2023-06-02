@@ -28,6 +28,9 @@ document.getElementById('more').setAttribute('href','https://www.flickr.com/phot
 const $photos = document.getElementById('photos');	
 
 function jsonFlickrFeed(feed) {
+	feed.items.sort((a,b) => {
+   		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
+	});
 	for (const item of feed.items) {
 
 		const $div = document.createElement('div');

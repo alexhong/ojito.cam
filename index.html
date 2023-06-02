@@ -20,6 +20,7 @@ function ready() {
 </head>
 
 <body onload="ready()">
+<h1 id="h1" class="search"><input type="text" placeholder="search" onchange="window.location.search=this.value"></h1>
 <ul id="photos"></ul>
 <p><a id="more" href="static.html">&hellip;</a></p>
 
@@ -104,11 +105,11 @@ const $script = document.createElement('script');
 let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
 	query = window.location.search.slice(1);
 if (query && query != 'o') {
-	const $h1 = document.createElement('h1');
+	const $h1 = document.getElementById('h1');
 	const tags = query.toLowerCase().replaceAll('%20','').replaceAll('-','');
 	url += '&tagmode=any&tags='+tags;
+	$h1.classList.remove('search');
 	$h1.innerHTML = '<a href="?">'+query.replaceAll('%20',' ')+'</a>';
-	$photos.before($h1);
 }
 $script.setAttribute('src',url);
 document.body.append($script);

@@ -104,7 +104,7 @@ if (query && query != '?o') {
 	const $h1 = document.createElement('h1');
 	const tags = query.slice(1).toLowerCase().replaceAll('%20','').replaceAll('-','');
 	url += '&tagmode=any&tags='+tags;
-	$h1.innerHTML = 'TAGGED: <u>'+tags+'</u>';
+	$h1.innerHTML = 'TAGGED: <a href="?">'+tags+'</a>';
 	$photos.before($h1);
 }
 $script.setAttribute('src',url);

@@ -20,9 +20,9 @@ function ready() {
 </head>
 
 <body onload="ready()">
-<h1 id="h1" class="search"><input type="text" placeholder="brand/model" onchange="window.location.search=this.value"></h1>
+<h1 id="h1"><span><input type="text" placeholder="brand/model" onchange="window.location.search=this.value"></span></h1>
 <ul id="photos"></ul>
-<p><a id="more" href="static.html">&hellip;</a></p>
+<p><a id="more" href="static.html"><span>&hellip;</span></a></p>
 
 <script>
 document.getElementById('more').setAttribute('href','https://www.flickr.com/photos/ojitocam/');
@@ -108,8 +108,10 @@ if (query && query.split('=').length < 2) {
 	const $h1 = document.getElementById('h1');
 	const tags = query.toLowerCase().replaceAll('%20','').replaceAll('-','');
 	url += '&tagmode=any&tags='+tags;
-	$h1.classList.remove('search');
-	$h1.innerHTML = '<a href="?">'+query.replaceAll('%20',' ')+'</a>';
+	document.body.className = 'tagged';
+	$h1.innerHTML = '<a href="?"><span>'+query.replaceAll('%20',' ')+'</span></a>';
+} else {
+	document.body.className = 'search';
 }
 $script.setAttribute('src',url);
 document.body.append($script);

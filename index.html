@@ -7,14 +7,25 @@
 <title>ojito.cam</title>
 <link rel="stylesheet" href="cps/stylesheet.css">
 <link rel="stylesheet" href="style.css">
+<script src="smartquotes.js"></script>
+<script>
+function ready() {
+	smartquotes();
+	if (window.location.search == '?o') {
+		const output = $photos.innerHTML, lines = output.split('\n').length;
+		document.body.innerHTML = '<textarea rows="'+lines+'" onClick="this.setSelectionRange(0,this.value.length)">'+output+'</textarea>';
+	}
+}
+</script>
 </head>
 
-<body>
+<body onload="ready()">
 <ul id="photos"></ul>
 <p><a id="more" href="static.html">&hellip;</a></p>
+
 <script>
-const $photos = document.getElementById('photos');	
 document.getElementById('more').setAttribute('href','https://www.flickr.com/photos/ojitocam/');
+const $photos = document.getElementById('photos');	
 
 function jsonFlickrFeed(feed) {
 	for (const item of feed.items) {
@@ -52,12 +63,14 @@ function jsonFlickrFeed(feed) {
 
 		let brand = item.tags.split(' ')[0], 
 			model = item.tags.split(' ')[1], 
-			url = 'https://www.dpreview.com/products/'+brand+'/compacts/'+brand+'_'+model;
+			path = brand+'/compacts/'+brand+'_'+model;
 		switch(model) {
 			case 'dmcfz35': model = 'DMC-FZ35'; break;
+			case 'dmcls2': 	model = 'DMC-LS2'; 	break;
 			case 'dmclx2': 	model = 'DMC-LX2'; 	break;
 			case 'dmcsz1': 	model = 'DMC-SZ1'; 	break;
 			case 'dsct20': 	model = 'DSC-T20'; 	break;
+			case 'g600': 	model = 'G600'; 	path = 'konicaminolta/compacts/konicaminolta_dimageg600'; break;
 			case 'griiix': 	model = 'GR IIIx'; 	break;
 			case 'l4v': 	model = 'L4V';		break;
 			case 's95': 	model = 'S95'; 		break;
@@ -65,35 +78,32 @@ function jsonFlickrFeed(feed) {
 		if (model) {
 			const _cam = document.createElement('a');
 			_cam.className = 'cam';
-			_cam.setAttribute('href',url);
+			_cam.setAttribute('href','https://www.dpreview.com/products/'+path);
 			_cam.textContent = model;
 			$div.append(' ',_cam);
 		}
 
-		let $li = document.createElement('li');
+		const $li = document.createElement('li');
 		$li.append($div);
 		$photos.append($li,'\n');
 
 		const p = item.description.split('<p>');
 		if (p.length > 3 && p[3].trim() != '</p>') {
-			$li = document.createElement('li');
-			$li.innerHTML = '<p>'+p[3].trim();
-			$photos.append($li,'\n');
+			const $li2 = document.createElement('li');
+			$li2.innerHTML = '<p>'+p[3].trim();
+			$photos.append($li2,'\n');
 		}
 
 	}
 }
-</script>
-<script src="https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json"></script>
-<script src="smartquotes.js"></script>
-<script>
-	if (window.location.search == '?o') {
-		let output = $photos.innerHTML,
-			lines = output.split('\n').length;
-		document.body.innerHTML = '<textarea rows="'+lines+'" onClick="this.setSelectionRange(0,this.value.length)">'+output+'</textarea>';
-	} else {
-		smartquotes();
-	}
+
+const $script = document.createElement('script');
+let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
+	query = window.location.search;
+if (query && query != '?o')
+	url += '&tagmode=any&tags='+query.replace('-','').toLowerCase();
+$script.setAttribute('src',url);
+document.body.append($script);
 </script>
 </body>
 

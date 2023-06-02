@@ -37,9 +37,9 @@ h1 a {
 h1 input {
 	width: 100%;
 	font: inherit;
-	line-height: 18px;
 	border: 0;
 	border-bottom: 1px solid;
+	margin-bottom: -1px;
 	color: #fff;
 	background: transparent;
 }

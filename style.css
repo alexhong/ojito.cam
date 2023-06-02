@@ -34,15 +34,14 @@ h1 {
 }
 h1 a {
 	color: #fff;
-	padding: 2px 0 0 30px;
+	padding: 2px 25px 0;
 	margin-bottom: -2px;
-	background: url(icons/icon-tag.png) left no-repeat;
-	background-size: 20px 20px;
+	background: url(icons/icon-x.png) right no-repeat;
+	background-size: 15px 15px;
 }
 h1 a:hover,
 h1 a:focus {
-	background-image: url(icons/icon-x.png);
-	opacity: 0.5;
+	text-decoration: line-through;
 }
 li {
 	line-height: 0;

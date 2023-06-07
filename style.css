@@ -29,11 +29,10 @@ a:hover,
 a:focus {
 	color: #fff; 
 }
-h1 {
-	font: inherit;
+header {
 	white-space: nowrap;
 }
-h1 > span {
+header > span {
 	display: block;
 	width: 120px;
 	margin: 0 auto;	
@@ -44,7 +43,7 @@ h1 > span {
 	opacity: 0.5;
 	box-shadow: inset 0 1px 4px rgba(0,0,0,0.2);
 }
-h1 input {
+header input {
 	width: 100%;
 	font: inherit;
 	border: 0;
@@ -53,15 +52,15 @@ h1 input {
 	color: #fff;
 	background: transparent;
 }
-.tagged h1 {
+.tagged header {
 	position: fixed;
 	left: 0;
 	right: 0;
 }
-.search h1 {
+.search header {
 	margin-bottom: -40px;
 }
-h1 a {
+header a {
 	display: inline-block;
 	color: #fff;
 	background: #000;
@@ -71,12 +70,12 @@ h1 a {
 	opacity: 0.5;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
-h1 a:hover,
-h1 a:focus {
+header a:hover,
+header a:focus {
 	opacity: 0.75;
 	text-decoration: line-through;
 }
-h1 a span {
+header a span {
 	padding: 0 25px 0 0;
 	background: url(icons/icon-x.png) right 1px no-repeat;
 	background-size: 15px 15px;

@@ -16,22 +16,21 @@ function ready() {
 	smartquotes();
 	if (window.location.search == '?=') {
 		const output = $photos.innerHTML, lines = output.split('\n').length;
-		document.body.innerHTML = '<textarea rows="'+lines+'" onClick="this.setSelectionRange(0,this.value.length)">'+output+'</textarea>';
+		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
 }
 </script>
 </head>
 
 <body onload="ready()">
-<h1 id="h1"><span><input type="text" placeholder="brand/model" onchange="window.location.search=this.value"></span></h1>
+<header id="h"><span><input type="text" placeholder="brand/model" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
 <p><a id="more" href="static.html"><span>&hellip;</span></a></p>
 
 <script>
-document.getElementById('more').setAttribute('href','https://www.flickr.com/photos/ojitocam/');
-const $photos = document.getElementById('photos');	
-
+const $photos = document.getElementById('photos');
 function jsonFlickrFeed(feed) {
+	document.getElementById('more').setAttribute('href',feed.link);
 	feed.items.sort((a,b) => {
    		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
 	});
@@ -59,7 +58,7 @@ function jsonFlickrFeed(feed) {
 			const $cite = document.createElement('cite');
 			if (title[0] == '@') {
 				const _ig = document.createElement('a');
-				_ig.setAttribute('href','https://www.instagram.com/'+title.slice(1)+'/');
+				_ig.setAttribute('href',`https://www.instagram.com/${title.slice(1)}/`);
 				_ig.textContent = title;
 				$cite.append(_ig);
 			} else {
@@ -97,7 +96,7 @@ function jsonFlickrFeed(feed) {
 		const p = item.description.split('<p>');
 		if (p.length > 3 && p[3].trim() != '</p>') {
 			const $li2 = document.createElement('li');
-			$li2.innerHTML = '<p>'+p[3].trim();
+			$li2.innerHTML = '<p>'+p[3].trim().replace('="/',`="${feed.generator}/`);
 			$photos.append($li2,'\n');
 		}
 
@@ -105,14 +104,14 @@ function jsonFlickrFeed(feed) {
 }
 
 const $script = document.createElement('script');
-let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
-	query = window.location.search.slice(1);
+const url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
+const query = window.location.search.slice(1);
 if (query && query.split('=').length < 2) {
-	const $h1 = document.getElementById('h1');
+	const $h = document.getElementById('h');
 	const tags = query.toLowerCase().replaceAll('%20','').replaceAll('-','');
 	url += '&tagmode=any&tags='+tags;
 	document.body.className = 'tagged';
-	$h1.innerHTML = '<a href="?"><span>'+query.replaceAll('%20',' ')+'</span></a>';
+	$h.innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
 } else {
 	document.body.className = 'search';
 }

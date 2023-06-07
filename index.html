@@ -67,8 +67,8 @@ function jsonFlickrFeed(feed) {
 			$div.append(' ',$cite);
 		}
 
-		let brand = item.tags.split(' ')[0], 
-			model = item.tags.split(' ')[1], 
+		let model = item.tags.split(' ')[0], 
+			brand = item.tags.split(' ')[1], 
 			path = brand+'/compacts/'+brand+'_'+model;
 		switch(model) {
 			case 'dmcfz35': model = 'DMC-FZ35'; break;

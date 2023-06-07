@@ -104,8 +104,8 @@ function jsonFlickrFeed(feed) {
 }
 
 const $script = document.createElement('script');
-const url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
 const query = window.location.search.slice(1);
+let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
 if (query && query.split('=').length < 2) {
 	const $h = document.getElementById('h');
 	const tags = query.toLowerCase().replaceAll('%20','').replaceAll('-','');

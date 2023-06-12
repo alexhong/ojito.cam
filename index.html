@@ -5,8 +5,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
 <title>ojito.cam</title>
-<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="stylesheet" href="cps/stylesheet.css">
 <link rel="stylesheet" href="style.css">
@@ -22,7 +22,7 @@ function ready() {
 </script>
 </head>
 
-<body onload="ready()">
+<body class="search" onload="ready()">
 <header id="h"><span><input type="text" placeholder="brand/model" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
 <p><a id="more" href="static.html"><span>&hellip;</span></a></p>
@@ -35,7 +35,6 @@ function jsonFlickrFeed(feed) {
    		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
 	});
 	for (const item of feed.items) {
-
 		const $div = document.createElement('div');
 		const $img = document.createElement('img');
 		$img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
@@ -99,24 +98,20 @@ function jsonFlickrFeed(feed) {
 			$li2.innerHTML = '<p>'+p[3].trim().replace('="/',`="${feed.generator}/`);
 			$photos.append($li2,'\n');
 		}
-
 	}
 }
 
-const $script = document.createElement('script');
-const query = window.location.search.slice(1);
-let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
+let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04',
+	query = window.location.search.slice(1);
 if (query && query.split('=').length < 2) {
-	const $h = document.getElementById('h');
-	const tags = query.toLowerCase().replaceAll('%20','').replaceAll('-','');
-	url += '&tagmode=any&tags='+tags;
+	url += '&tagmode=any&tags='+query.toLowerCase().replaceAll('%20','').replaceAll('-','');
 	document.body.className = 'tagged';
-	$h.innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
-} else {
-	document.body.className = 'search';
+	document.getElementById('h').innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
 }
-$script.setAttribute('src',url);
+const $script = document.createElement('script');
+$script.setAttribute('src',url+'&format=json');
 document.body.append($script);
+document.head.innerHTML += `<link rel="alternate" type="application/atom+xml" href="${url}&format=atom">`;
 </script>
 </body>
 

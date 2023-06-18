@@ -13,6 +13,9 @@ body {
 	text-align: center;
 	padding: 20px;
 }
+@supports (-webkit-touch-callout: none) {
+ 	body { background: #808080; }
+}
 textarea {
 	font: 10px/15px Menlo, monospace;
 	width: 100%;

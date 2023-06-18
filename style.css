@@ -8,7 +8,7 @@
 }
 body {
 	color: #c0c0c0;
-	background: #808080;
+	background: fixed linear-gradient(#909090,#707070);
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px;
@@ -23,7 +23,9 @@ textarea {
 a { 
 	text-decoration: none;
 	color: inherit;
-	/*background: rgba(255,0,0,0.5);*/
+}
+div a {
+	color: rgba(255,255,255,0.5);
 }
 a:hover,
 a:focus {
@@ -72,7 +74,7 @@ header a {
 }
 header a:hover,
 header a:focus {
-	opacity: 0.75;
+	opacity: 0.8;
 	text-decoration: line-through;
 }
 header a span {
@@ -95,7 +97,7 @@ li p {
 	margin: 6px auto 14px;
 	padding: 20px;
 	max-width: 360px;
-	background: #606060;
+	background: rgba(0,0,0,0.2);
 	border-radius: 4px;
 }
 li p a {
@@ -105,7 +107,7 @@ div {
 	display: inline-block;
 	text-align: right;
 	padding: 60px 0 12px;
-	text-shadow: 0 -1px 0 #606060;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
 }
 div > * {
 	display: block;

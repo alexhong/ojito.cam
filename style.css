@@ -8,13 +8,22 @@
 }
 body {
 	color: #c0c0c0;
-	background: fixed linear-gradient(#909090,#707070);
+	background: #909090;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px;
 }
-@supports (-webkit-touch-callout: none) {
- 	body { background: #808080; }
+/* iOS bg fix */
+body:before {
+   content: '';
+   position: fixed;
+   z-index: -1;
+   display: block;
+   top: 0px;
+   left: 0px;
+   bottom: 0px;
+   right: 0px;
+   background: linear-gradient(#909090,#707070);
 }
 textarea {
 	font: 10px/15px Menlo, monospace;

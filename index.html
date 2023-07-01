@@ -72,7 +72,7 @@ function jsonFlickrFeed(feed) {
 			brand = item.tags.split(' ')[1], 
 			path = brand+'/compacts/'+brand+'_'+model;
 		switch(model) {
-			case '43wr': 	model = '43WR'; 	path= 'pentax/compacts/pentax_optio43wr'; break;
+			case '43wr': 	model = '43WR'; 	path = 'pentax/compacts/pentax_optio43wr'; break;
 			case 'dmcfz35': model = 'DMC-FZ35'; break;
 			case 'dmcls2': 	model = 'DMC-LS2'; 	break;
 			case 'dmcls75': model = 'DMC-LS75'; break;
@@ -82,6 +82,7 @@ function jsonFlickrFeed(feed) {
 			case 'g600': 	model = 'G600'; 	path = 'konicaminolta/compacts/konicaminolta_dimageg600'; break;
 			case 'griiix': 	model = 'GR IIIx'; 	break;
 			case 'l4v': 	model = 'L4V';		break;
+			case 's95': 	model = 'S95';		break;
 			case 'sl300r': 	model = 'SL300R'; 	break;
 		}
 		if (model) {

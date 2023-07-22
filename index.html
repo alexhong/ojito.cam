@@ -31,6 +31,13 @@ function ready() {
 
 <script>
 const $photos = document.getElementById('photos');
+function a(text,url,c) {
+	const $a = document.createElement('a');
+	$a.append(text);
+	$a.setAttribute('href',url);
+	if (c) $a.className = c;
+	return $a;
+}
 function jsonFlickrFeed(feed) {
 	document.getElementById('more').setAttribute('href',feed.link);
 	feed.items.sort((a,b) => {
@@ -48,24 +55,15 @@ function jsonFlickrFeed(feed) {
 		$time.setAttribute('datetime',timestamp);
 		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
-		const _perma = document.createElement('a')
-		_perma.className = 'perma';
-		_perma.setAttribute('href',item.link);
-		_perma.append($time);
-		$div.append(' ',_perma);
-
+		const $perma = a($time,item.link,'perma');
 		const title = item.title.trim();
-		if (title) {
-			const $cite = document.createElement('cite');
-			if (title[0] == '@') {
-				const _ig = document.createElement('a');
-				_ig.setAttribute('href',`https://www.instagram.com/${title.slice(1)}/`);
-				_ig.textContent = title;
-				$cite.append(_ig);
-			} else {
-				$cite.textContent = title;
-			}
-			$div.append(' ',$cite);
+		if (title[0] == '@') {
+			$div.append(' ',$perma,' ',a(title,'https://www.instagram.com/'+title.slice(1)+'/','insta'));
+		} else if (title) {
+			$perma.append(' ',title);
+			$div.append(' ',$perma);
+		} else {
+			$div.append(' ',$perma);
 		}
 
 		let tags = item.tags.split(' '),
@@ -88,20 +86,10 @@ function jsonFlickrFeed(feed) {
 			case 's95': 	model = 'S95';		break;
 			case 'sl300r': 	model = 'SL300R'; 	break;
 		}
-		if (model) {
-			const _cam = document.createElement('a');
-			_cam.className = 'cam';
-			_cam.setAttribute('href','https://www.dpreview.com/products/'+path);
-			_cam.textContent = model;
-			$div.append(' ',_cam);
-		}
-		if (last == 'fullspectrum') {
-			const _fs = document.createElement('a');
-			_fs.className = 'fs';
-			_fs.setAttribute('href','https://en.wikipedia.org/wiki/Full-spectrum_photography');
-			_fs.textContent = 'full spectrum';
-			$div.append(' ',_fs);
-		}
+		if (model)
+			$div.append(' ',a(model,'https://www.dpreview.com/products/'+path));
+		if (last == 'fullspectrum')
+			$div.append(document.createElement('br'),a('full spectrum','https://en.wikipedia.org/wiki/Full-spectrum_photography'));
 
 		const $li = document.createElement('li');
 		$li.append($div);

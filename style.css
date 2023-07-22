@@ -3,6 +3,7 @@
 	padding: 0;
 	border-radius: 0;
 	outline: none;
+	font-style: normal;
 	list-style: none;
 	-webkit-text-size-adjust: 100%;
 }
@@ -36,8 +37,7 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
-div a,
-div cite {
+div a {
 	color: rgba(255,255,255,0.5);
 }
 a:hover,
@@ -123,10 +123,10 @@ div {
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
 }
 div > * {
-	display: block;
 	padding: 0 4px;
 }
 div > img {
+	display: block;
 	padding: 0;
 	margin-bottom: 8px;
 	box-sizing: border-box;
@@ -136,29 +136,13 @@ div > img {
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 div a.perma,
-div cite {
+div a.insta {
+	text-align: left;
 	float: left;
 	clear: left;
-	font-style: normal;
 }
-div a.perma:hover:after,
-div a.perma:focus:after {
-	content: '#';
-	margin-left: 5px;
-}
-div a.cam {
-	display: inline;
-}
-div a.cam:hover:before,
-div a.cam:focus:before,
-div a.fs:hover:before,
-div a.fs:focus:before  {
-	content: '?';
-	margin-right: 5px;
-}
-div cite a {
-	padding: 0 4px;
-	margin: 0 -4px;
+div a time {
+	display: block;
 }
 body>p {
 	padding: 60px 0 120px;

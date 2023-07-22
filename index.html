@@ -89,7 +89,7 @@ function jsonFlickrFeed(feed) {
 		if (model)
 			$div.append(' ',a(model,'https://www.dpreview.com/products/'+path));
 		if (last == 'fullspectrum')
-			$div.append(document.createElement('br'),a('full spectrum','https://en.wikipedia.org/wiki/Full-spectrum_photography'));
+			$div.append(a('(FS)','https://en.wikipedia.org/wiki/Full-spectrum_photography'));
 
 		const $li = document.createElement('li');
 		$li.append($div);

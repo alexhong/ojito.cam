@@ -141,9 +141,6 @@ div cite {
 	clear: left;
 	font-style: normal;
 }
-div cite.fs {
-	float: right;
-}
 div a.perma:hover:after,
 div a.perma:focus:after {
 	content: '#';
@@ -153,7 +150,9 @@ div a.cam {
 	display: inline;
 }
 div a.cam:hover:before,
-div a.cam:focus:before {
+div a.cam:focus:before,
+div a.fs:hover:before,
+div a.fs:focus:before  {
 	content: '?';
 	margin-right: 5px;
 }

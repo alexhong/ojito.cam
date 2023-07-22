@@ -64,13 +64,14 @@ function jsonFlickrFeed(feed) {
 				$cite.append(_ig);
 			} else {
 				$cite.textContent = title;
-				if (title == 'full spectrum') $cite.className = 'fs';
 			}
 			$div.append(' ',$cite);
 		}
 
-		let model = item.tags.split(' ')[0], 
-			brand = item.tags.split(' ')[1], 
+		let tags = item.tags.split(' '),
+			model = tags[0], 
+			brand = tags[1],
+			last = tags[tags.length-1], 
 			path = brand+'/compacts/'+brand+'_'+model;
 		switch(model) {
 			case 'dmcfx100':model = 'DMC-FX100'; break;
@@ -93,6 +94,13 @@ function jsonFlickrFeed(feed) {
 			_cam.setAttribute('href','https://www.dpreview.com/products/'+path);
 			_cam.textContent = model;
 			$div.append(' ',_cam);
+		}
+		if (last == 'fullspectrum') {
+			const _fs = document.createElement('a');
+			_fs.className = 'fs';
+			_fs.setAttribute('href','https://en.wikipedia.org/wiki/Full-spectrum_photography');
+			_fs.textContent = 'full spectrum';
+			$div.append(' ',_fs);
 		}
 
 		const $li = document.createElement('li');

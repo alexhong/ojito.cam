@@ -141,6 +141,9 @@ div cite {
 	clear: left;
 	font-style: normal;
 }
+div cite.fs {
+	float: right;
+}
 div a.perma:hover:after,
 div a.perma:focus:after {
 	content: '#';

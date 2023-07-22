@@ -64,6 +64,7 @@ function jsonFlickrFeed(feed) {
 				$cite.append(_ig);
 			} else {
 				$cite.textContent = title;
+				if (title == 'full spectrum') $cite.className = 'fs';
 			}
 			$div.append(' ',$cite);
 		}

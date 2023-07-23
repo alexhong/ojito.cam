@@ -16,7 +16,7 @@
 <script>
 function ready() {
 	smartquotes();
-	if (window.location.search == '?=') {
+	if (window.location.search=='?=') {
 		const output = $photos.innerHTML, lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
@@ -25,7 +25,7 @@ function ready() {
 </head>
 
 <body class="search" onload="ready()">
-<header id="h"><span><input type="text" placeholder="tags" onchange="window.location.search=this.value"></span></header>
+<header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
 <p><a id="more" href="static.html"><span>&hellip;</span></a></p>
 
@@ -34,7 +34,7 @@ const $photos = document.getElementById('photos');
 function a(text,url,c) {
 	const $a = document.createElement('a');
 	$a.append(text);
-	$a.setAttribute('href',url);
+	$a.setAttribute('href',(url.slice(0,2)=='//')?`https:${url}`:url);
 	if (c) $a.className = c;
 	return $a;
 }
@@ -57,8 +57,8 @@ function jsonFlickrFeed(feed) {
 
 		const $perma = a($time,item.link,'perma');
 		const title = item.title.trim();
-		if (title[0] == '@') {
-			$div.append(' ',$perma,' ',a(title,'https://www.instagram.com/'+title.slice(1)+'/','insta'));
+		if (title[0]=='@') {
+			$div.append(' ',$perma,' ',a(title,'//www.instagram.com/'+title.slice(1)+'/','insta'));
 		} else if (title) {
 			$perma.append(' ',title);
 			$div.append(' ',$perma);
@@ -69,27 +69,25 @@ function jsonFlickrFeed(feed) {
 		let tags = item.tags.split(' '),
 			model = tags[0], 
 			brand = tags[1],
-			last = tags[tags.length-1], 
-			path = brand+'/compacts/'+brand+'_'+model;
+			path = brand+'/compacts/'+brand+'_'+model,
+			fspec = (tags[tags.length-1]=='fullspectrum');
 		switch(model) {
-			case 'dmcfx100':model = 'DMC-FX100'; break;
-			case 'dmcfz35': model = 'DMC-FZ35'; break;
-			case 'dmcls2': 	model = 'DMC-LS2'; 	break;
-			case 'dmcls75': model = 'DMC-LS75'; break;
-			case 'dmclx2': 	model = 'DMC-LX2'; 	break;
-			case 'dmcsz1': 	model = 'DMC-SZ1'; 	break;
-			case 'dsct20': 	model = 'DSC-T20'; 	break;
-			case 'g600': 	model = 'G600'; 	path = 'konicaminolta/compacts/konicaminolta_dimageg600'; break;
-			case 'griiix': 	model = 'GR IIIx'; 	break;
-			case 'kd300z': 	model = 'KD-300Z'; 	break;
-			case 'l4v': 	model = 'L4V';		break;
-			case 's95': 	model = 'S95';		break;
-			case 'sl300r': 	model = 'SL300R'; 	break;
+			case 'dmcfx100': 	model = 'DMC-FX100'; 	break;
+			case 'dmcfz35': 	model = 'DMC-FZ35';		break;
+			case 'dmcls2': 		model = 'DMC-LS2'; 		break;
+			case 'dmcls75': 	model = 'DMC-LS75'; 	break;
+			case 'dmclx2': 		model = 'DMC-LX2';		break;
+			case 'dmcsz1': 		model = 'DMC-SZ1'; 		break;
+			case 'dsct20': 		model = 'DSC-T20'; 		break;
+			case 'g600': 		model = 'G600'; path = 'konicaminolta/compacts/konicaminolta_dimageg600'; break;
+			case 'griiix': 		model = 'GR IIIx'; 		break;
+			case 'kd300z': 		model = 'KD-300Z'; 		break;
+			case 'l4v': 		model = 'L4V';			break;
+			case 's95': 		model = 'S95';			break;
+			case 'sl300r': 		model = 'SL300R'; 		break;
 		}
-		if (model)
-			$div.append(' ',a(model,'https://www.dpreview.com/products/'+path));
-		if (last == 'fullspectrum')
-			$div.append(a('(FS)','https://en.wikipedia.org/wiki/Full-spectrum_photography'));
+		if (model) $div.append(' ',a(model,'//www.dpreview.com/products/'+path));
+		if (fspec) $div.append(a('(FS)','//en.wikipedia.org/wiki/Full-spectrum_photography'));
 
 		const $li = document.createElement('li');
 		$li.append($div);
@@ -104,15 +102,15 @@ function jsonFlickrFeed(feed) {
 	}
 }
 
-let url = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04',
+let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
 	query = window.location.search.slice(1);
 if (query && query.split('=').length < 2) {
-	url += '&tagmode=all&tags='+query.toLowerCase().replaceAll('%20','').replaceAll('-','');
+	json += '&tagmode=all&tags='+query.toLowerCase().replaceAll('%20','').replaceAll('-','');
 	document.body.className = 'tagged';
 	document.getElementById('h').innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
 }
 const $script = document.createElement('script');
-$script.setAttribute('src',url+'&format=json');
+$script.setAttribute('src',json);
 document.body.append($script);
 </script>
 </body>

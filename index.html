@@ -72,6 +72,7 @@ function jsonFlickrFeed(feed) {
 			path = brand+'/compacts/'+brand+'_'+model,
 			fspec = (tags[tags.length-1]=='fullspectrum');
 		switch(model) {
+			case 'dct50': 		model = 'DC-T50'; path = 'toshiba/compacts/toshiba_pdr5300'; break;
 			case 'dmcfx100': 	model = 'DMC-FX100'; 	break;
 			case 'dmcfz35': 	model = 'DMC-FZ35';		break;
 			case 'dmcls2': 		model = 'DMC-LS2'; 		break;

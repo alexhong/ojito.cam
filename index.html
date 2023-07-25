@@ -88,6 +88,7 @@ function jsonFlickrFeed(feed) {
 			case 'l4v': 		model = 'L4V';			break;
 			case 's95': 		model = 'S95';			break;
 			case 'sl300r': 		model = 'SL300R'; 		break;
+			case 'uca401': 		model = 'U-CA 401'; 	break;
 		}
 		if (model) $div.append(' ',a(model,(path.slice(0,2)=='//')?path:'//www.dpreview.com/products/'+path));
 		if (fspec) $div.append(a('(FS)','//en.wikipedia.org/wiki/Full-spectrum_photography'));

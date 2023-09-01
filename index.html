@@ -72,7 +72,8 @@ function jsonFlickrFeed(feed) {
 			brand = tags[1],
 			path = brand+'/compacts/'+brand+'_'+model
 				.replace('g600','dimageg600')
-				.replace('sd790','sd790is'),
+				.replace('sd790','sd790is')
+				.replace('vs20','optiovs20'),
 			fs = (tags[tags.length-1]=='fullspectrum'),
 			ir = (tags[tags.length-1]=='infrared');
 		switch(model) {
@@ -82,7 +83,8 @@ function jsonFlickrFeed(feed) {
 			case 'griiix':	model = 'GR IIIx';	break;
 			case 'kd300z':	model = 'KD-300Z';	break;
 			case 'uca401':	model = 'U-CA 401';	break;
-			case 'verve':	model = 'Verve'; break;
+			case 'verve':	path = '/olympus/compacts/oly_stylusverve';
+							model = 'Verve';	break;
 			default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 		}
 		if (model) $div.append(' ',a(model,(path.slice(0,2)=='//')?path:'//www.dpreview.com/products/'+path));

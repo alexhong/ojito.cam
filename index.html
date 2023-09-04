@@ -18,7 +18,7 @@
 function ready() {
 	smartquotes();
 	if (window.location.search == '?=') {
-		const output = $photos.innerHTML, lines = output.split('\n').length;
+		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
 }
@@ -100,7 +100,7 @@ function jsonFlickrFeed(feed) {
 		const p = item.description.split('<p>');
 		if (p.length > 3 && p[3].trim() != '</p>') {
 			const $li2 = document.createElement('li');
-			$li2.innerHTML = '<p>'+p[3].trim().replace('="/',`="${feed.generator}/`);
+			$li2.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
 			$photos.append($li2,'\n');
 		}
 	}

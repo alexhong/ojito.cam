@@ -70,28 +70,30 @@ function jsonFlickrFeed(feed) {
 		let tags = item.tags.split(' '),
 			model = tags[0], 
 			brand = tags[1],
-			last = tags.pop(),
-			slug = brand.replace('olympus','oly')+'_'+model
+			last = tags.pop();
+		if (model && brand) {
+			let slug = brand.replace('olympus','oly')+'_'+model
 				.replace('g600','dimageg600')
 				.replace('sd790','sd790is')
 				.replace('verve','stylusverve')
 				.replace('vs20','optiovs20')
 			,
 			path = 'www.dpreview.com/products/'+brand+'/compacts/'+slug;
-		switch(model) {
-			case '': break;
-			case 'dct50':	path = 'www.dpreview.com/articles/0053585370/gatewaydigicams'; 
-							model = 'DC-T50';	break;
-			case 'griiix':	model = 'GR IIIx';	break;
-			case 'kd300z':	model = 'KD-300Z';	break;
-			case 'uca401':	model = 'U-CA 401';	break;
-			case 'verve':	model = 'Verve';	break;
-			case 'verves':	model = 'Verve S';	break;
-			default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
+			switch(model) {
+				case '': break;
+				case 'dct50':	path = 'www.dpreview.com/articles/0053585370/gatewaydigicams'; 
+								model = 'DC-T50';	break;
+				case 'griiix':	model = 'GR IIIx';	break;
+				case 'kd300z':	model = 'KD-300Z';	break;
+				case 'uca401':	model = 'U-CA 401';	break;
+				case 'verve':	model = 'Verve';	break;
+				case 'verves':	model = 'Verve S';	break;
+				default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
+			}
+			$div.append(' ',a(model,path));
+			if (last == 'fullspectrum') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
+			if (last == 'infrared') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
 		}
-		if (model) $div.append(' ',a(model,path));
-		if (last == 'fullspectrum') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
-		if (last == 'infrared') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
 
 		const $li = document.createElement('li');
 		$li.append($div);

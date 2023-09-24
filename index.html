@@ -88,6 +88,7 @@ function jsonFlickrFeed(feed) {
 				case 'uca401':	model = 'U-CA 401';	break;
 				case 'verve':	model = 'Verve';	break;
 				case 'verves':	model = 'Verve S';	break;
+				case 'j1250':	path = 'www.digicamdb.com/specs/ge_j1250/';
 				default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 			}
 			$div.append(' ',a(model,path));

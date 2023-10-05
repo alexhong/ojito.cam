@@ -73,14 +73,14 @@ function jsonFlickrFeed(feed) {
 			brand = tags[1],
 			last = tags.pop();
 		if (model && brand) {
-			let slug = brand.replace('olympus','oly')+'_'+model
-				.replace('7030','stylus7030')
-				.replace('g600','dimageg600')
-				.replace('sd790','sd790is')
-				.replace('verve','stylusverve')
-				.replace('vs20','optiovs20')
-			,
-			path = 'www.dpreview.com/products/'+brand+'/compacts/'+slug;
+			let m = model, b = brand;
+			if (brand == 'olympus') { b = 'oly'; m = 'stylus'+model; } 
+			switch(model) {
+				case 'g600':	m = 'dimageg600';	break;
+				case 'sd790':	m = 'sd790is';		break;
+				case 'vs20':	m = 'optiovs20';	break;
+			}
+			let path = `www.dpreview.com/products/${brand}/compacts/${b}_${m}`;
 			switch(model) {
 				case '': break;
 				case 'dct50':	path = 'www.dpreview.com/articles/0053585370/gatewaydigicams'; 
@@ -95,8 +95,8 @@ function jsonFlickrFeed(feed) {
 				default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 			}
 			$div.append(' ',a(model,path));
-			if (last == 'fullspectrum') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
-			if (last == 'infrared') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
+			if (last == 'fs') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
+			if (last == 'ir') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
 		}
 
 		const $li = document.createElement('li');

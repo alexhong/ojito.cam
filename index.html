@@ -54,6 +54,7 @@ function jsonFlickrFeed(feed) {
 		const $time = document.createElement('time');
 		const timestamp = item.date_taken;
 		$time.setAttribute('datetime',timestamp);
+		$time.setAttribute('title',timestamp.slice(11,16));
 		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
 		const $perma = a($time,item.link.slice(8),'perma');

@@ -114,8 +114,11 @@ function jsonFlickrFeed(feed) {
 
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
 	query = window.location.search.slice(1);
-if (query && query.split('=').length < 2) {
-	json += '&tagmode=any&tags='+query.toLowerCase().replaceAll('%20','').replaceAll('-','');
+if (query && query != '=') {
+	json += (query.indexOf('+') > 0) 
+		? '&tagmode=all&tags='+query.replaceAll('+',',')
+		: '&tagmode=any&tags='+query
+	;
 	document.body.className = 'tagged';
 	document.getElementById('h').innerHTML = `<a href="."><span>${query.replaceAll('%20',' ')}</span></a>`;
 }

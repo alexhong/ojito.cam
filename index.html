@@ -104,7 +104,7 @@ function jsonFlickrFeed(feed) {
 		$photos.append($li,'\n');
 
 		const p = item.description.split('<p>');
-		if (p.length > 3 && p[3].trim() != '</p>') {
+		if (p.length > 3 && p[3].trim() !== '</p>') {
 			const $li2 = document.createElement('li');
 			$li2.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
 			$photos.append($li2,'\n');
@@ -114,7 +114,7 @@ function jsonFlickrFeed(feed) {
 
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
 	query = window.location.search.slice(1);
-if (query && query != '=') {
+if (query && query.indexOf('=') == -1) {
 	json += (query.indexOf('+') > 0) 
 		? '&tagmode=all&tags='+query.replaceAll('+',',')
 		: '&tagmode=any&tags='+query

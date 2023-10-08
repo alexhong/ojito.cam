@@ -17,7 +17,7 @@
 <script>
 function ready() {
 	smartquotes();
-	if (window.location.search == '?=') {
+	if (window.location.search === '?=') {
 		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
@@ -59,7 +59,7 @@ function jsonFlickrFeed(feed) {
 
 		const $perma = a($time,item.link.slice(8),'perma');
 		const title = item.title.trim();
-		if (title[0] == '@') {
+		if (title[0] === '@') {
 			$div.append(' ',$perma,' ',a(title,'www.instagram.com/'+title.slice(1)+'/','insta'));
 		} else if (title) {
 			$perma.append(' ',title);
@@ -74,7 +74,7 @@ function jsonFlickrFeed(feed) {
 			last = tags.pop();
 		if (model && brand) {
 			let m = model, b = brand;
-			if (brand == 'olympus') { b = 'oly'; m = 'stylus'+model; } 
+			if (brand === 'olympus') { b = 'oly'; m = 'stylus'+model; } 
 			switch(model) {
 				case 'g600':	m = 'dimageg600';	break;
 				case 'sd790':	m = 'sd790is';		break;
@@ -95,8 +95,8 @@ function jsonFlickrFeed(feed) {
 				default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 			}
 			$div.append(' ',a(model,path));
-			if (last == 'fs') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
-			if (last == 'ir') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
+			if (last === 'fs') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));
+			if (last === 'ir') $div.append(a('(IR)','en.wikipedia.org/wiki/Infrared_photography'));
 		}
 
 		const $li = document.createElement('li');
@@ -114,7 +114,7 @@ function jsonFlickrFeed(feed) {
 
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
 	query = window.location.search.slice(1);
-if (query && query.indexOf('=') == -1) {
+if (query && query.indexOf('=') < 0) {
 	json += (query.indexOf('+') > 0) 
 		? '&tagmode=all&tags='+query.replaceAll('+',',')
 		: '&tagmode=any&tags='+query

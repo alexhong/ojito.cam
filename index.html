@@ -58,10 +58,27 @@ function jsonFlickrFeed(feed) {
 		$time.setAttribute('title',timestamp.slice(11,16));
 		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
+		let desc = false,
+			$desc = document.createElement('li'),
+			p = item.description.split('<p>');
+		if (p.length > 3 && p[3].trim() !== '</p>') {
+			$desc.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
+			p = $desc.firstChild.firstChild;
+			if (typeof p.getAttribute === 'function' && p.getAttribute('href')) {
+				p.className = 'at';
+				p.setAttribute('title',p.textContent);
+				p.textContent = '@';
+			} else {
+				desc = true;
+			}
+		}
+
 		const $perma = a($time,item.link.slice(8),'perma');
 		const title = item.title.trim();
 		if (title[0] === '@') {
-			$div.append(' ',$perma,' ',a('@','www.instagram.com/'+title.slice(1)+'/','insta',title));
+			$div.append(' ',$perma,' ',a('@','www.instagram.com/'+title.slice(1)+'/','at insta',title));
+		} else if (p.textContent === '@') {
+			$div.append(' ',$perma,' ',p);
 		} else if (title) {
 			$perma.append(' ',title);
 			$div.append(' ',$perma);
@@ -103,13 +120,7 @@ function jsonFlickrFeed(feed) {
 		const $li = document.createElement('li');
 		$li.append($div);
 		$photos.append($li,'\n');
-
-		const p = item.description.split('<p>');
-		if (p.length > 3 && p[3].trim() !== '</p>') {
-			const $li2 = document.createElement('li');
-			$li2.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
-			$photos.append($li2,'\n');
-		}
+		if (desc) $photos.append($desc,'\n');
 	}
 }
 

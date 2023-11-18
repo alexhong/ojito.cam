@@ -158,14 +158,13 @@ div > a {
 	white-space: nowrap;
 }
 div a.perma,
-div a.insta {
+div a.at {
 	text-align: left;
 	float: left;
 }
-div a.insta {
+div a.at {
 	font-size: 18px;
 	margin-top: -1px;
-
 }
 div a time {
 	display: block;

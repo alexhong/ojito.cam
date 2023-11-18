@@ -161,7 +161,11 @@ div a.perma,
 div a.insta {
 	text-align: left;
 	float: left;
-	clear: left;
+}
+div a.insta {
+	font-size: 18px;
+	margin-top: -1px;
+
 }
 div a time {
 	display: block;

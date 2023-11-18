@@ -32,11 +32,12 @@ function ready() {
 
 <script>
 const $photos = document.getElementById('photos');
-function a(text,url,c) {
+function a(text,url,c,title) {
 	const $a = document.createElement('a');
 	$a.append(text);
 	$a.setAttribute('href','https://'+url);
 	if (c) $a.className = c;
+	if (title) $a.setAttribute('title',title);
 	return $a;
 }
 function jsonFlickrFeed(feed) {
@@ -60,7 +61,7 @@ function jsonFlickrFeed(feed) {
 		const $perma = a($time,item.link.slice(8),'perma');
 		const title = item.title.trim();
 		if (title[0] === '@') {
-			$div.append(' ',$perma,' ',a(title,'www.instagram.com/'+title.slice(1)+'/','insta'));
+			$div.append(' ',$perma,' ',a('@','www.instagram.com/'+title.slice(1)+'/','insta',title));
 		} else if (title) {
 			$perma.append(' ',title);
 			$div.append(' ',$perma);

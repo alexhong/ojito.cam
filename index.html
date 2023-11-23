@@ -93,28 +93,28 @@ function jsonFlickrFeed(feed) {
 			last = tags.pop();
 		if (model && brand) {
 			let m = model, b = brand;
-			if (brand === 'olympus') { b = 'oly'; m = 'stylus'+model; } 
-			switch(model) {
-				case 'g600':	m = 'dimageg600';	break;
-				case 'sd790':	m = 'sd790is';		break;
-				case 'vs20':	m = 'optiovs20';	break;
+			if (brand === 'olympus') { 
+				b = 'oly'; m = 'stylus'+model;
+			} else {
+				switch(model) {
+					case 'g600':	m = 'dimageg600';	break;
+					case 'sd790':	m = 'sd790is';		break;
+					case 'vs20':	m = 'optiovs20';	break;
+				}
 			}
 			let path = `www.dpreview.com/products/${brand}/compacts/${b}_${m}`;
 			switch(model) {
 				case '': break;
-				case 'dct50':	path = 'www.dpreview.com/articles/0053585370/gatewaydigicams'; 
-								model = 'DC-T50';	break;
-				case 'sl300rt':	path = 'www.digicamdb.com/specs/contax_sl300r-t/',
-								model = 'SL300R T*';break;
-				case '7030':	model = 'µ-7030';	break;
-				case 'griiix':	model = 'GR IIIx';	break;
-				case 'kd300z':	model = 'KD-300Z';	break;
-				case 'pdr3310':	model = 'PDR-3310';	break;
-				case 'uca401':	model = 'U-CA 401';	break;
-				case 'verve':	model = 'Verve';	break;
-				case 'verves':	model = 'Verve S';	break;
+				case 'dct50':	path = 'www.dpreview.com/articles/0053585370/gatewaydigicams'; model = 'DC-T50'; break;
+				case 'griiix':	model = 'GR IIIx';		break;
+				case 'kd300z':	model = 'KD-300Z';		break;
+				case 'pdr3310':	model = 'PDR-3310';		break;
+				case 'sl300rt':	path = 'www.digicamdb.com/specs/contax_sl300r-t/'; model = 'SL300R T*';	break;
+				case 'uca401':	model = 'U-CA 401';		break;
+				case 'verve':	model = 'Verve';		break;
+				case 'verves':	model = 'Verve S';		break;
 				case 'j1250':	path = 'www.digicamdb.com/specs/ge_j1250/';
-				default:		model = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
+				default:    	model = (b === 'oly') ? 'µ-'+model : model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 			}
 			$div.append(' ',a(model,path));
 			if (last === 'fs') $div.append(a('(FS)','en.wikipedia.org/wiki/Full-spectrum_photography'));

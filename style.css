@@ -31,7 +31,7 @@ body {
 	background: #707070;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
-	padding: 20px;
+	padding: 20px 0 80px;
 }
 /* iOS bg fix */
 body:before {
@@ -115,9 +115,9 @@ header a span {
 	background-size: 15px 15px;
 }
 #photos {
-	padding-top: 20px;
+	padding: 20px;
 }
-li {
+#photos li {
 	line-height: 0;
 }
 li > * {
@@ -169,15 +169,32 @@ div a.at {
 div a time {
 	display: block;
 }
-body>p {
-	padding: 60px 0 120px;
+ul.links {
+	max-width: 40em;
+	margin: 40px auto;
+	padding: 0 15px;
 }
-#more {
-	padding: 0 10px;
-	font: bold 40px/40px 'Times New Roman', serif;
-	text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+#tags li:first-child {
+	margin: 0 10px;
+	opacity: 0.8;
 }
-#more span {
-	position: relative;
-	top: -10px;
+#tags .etc,
+#tags.min li+li+li+li+li+li+li.tag {
+	display: none;
+}
+ul.links li,
+#tags.min .etc {
+	display: inline-block;
+}
+ul.links a {
+	display: block;
+	background: #404040;
+	opacity: 0.5;
+	margin: 5px;
+	padding: 6px 8px 4px;
+	border-radius: 4px;
+}
+ul.links a:hover,
+ul.links a:focus {
+	opacity: 0.8;
 }

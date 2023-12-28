@@ -174,10 +174,6 @@ ul.links {
 	margin: 40px auto;
 	padding: 0 15px;
 }
-#tags li:first-child {
-	margin: 0 10px;
-	opacity: 0.8;
-}
 #tags .etc,
 #tags.min li+li+li+li+li+li+li.tag {
 	display: none;

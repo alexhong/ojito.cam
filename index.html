@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="1703810690.css">
+<link rel="stylesheet" href="1703817680.css">
 <script src="smartquotes.js"></script>
 <script>
 function ready() {
@@ -28,7 +28,9 @@ function ready() {
 <body class="search" onload="ready()">
 <header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
+<h2>popular tags</h2>
 <ul id="tags" class="links min"><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li></ul>
+<h2>all photos</h2>
 <ul class="links flickr"><li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 
 <script>
@@ -57,7 +59,7 @@ function jsonFlickrApi(obj) {
 function jsonFlickrFeed(feed) {
 	if (!feed.items.length) {
 		document.body.className = 'none';
-		$photos.innerHTML = '<li><em>no results</em><br>try these?</li>';
+		$photos.innerHTML = '<li><em>no results</em></li>';
 		$tags.classList.remove('min');
 		return;
 	}
@@ -154,7 +156,7 @@ if (query && query.indexOf('=') < 0) {
 		: '&tagmode=any&tags='+query
 	;
 	document.body.className = 'tagged';
-	document.getElementById('h').innerHTML = `<a href="."><span>${query.replaceAll('%20',' ')}</span></a>`;
+	document.getElementById('h').innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
 }
 const $script = document.createElement('script');
 $script.setAttribute('src',json);

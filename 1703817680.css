@@ -22,9 +22,15 @@
 	padding: 0;
 	border-radius: 0;
 	outline: none;
+	font-weight: normal;
 	font-style: normal;
 	list-style: none;
 	-webkit-text-size-adjust: 100%;
+}
+h2 {
+	font-size: 100%;
+	margin-top: 20px;
+	padding: 11px 0 9px;
 }
 em {
 	color: #fff;
@@ -50,7 +56,7 @@ body:before {
 }
 textarea {
 	font: 10px/15px Menlo, monospace;
-	width: 100%;
+	width: 90%;
 	padding: 5px;
 	box-sizing: border-box;
 	white-space: nowrap;
@@ -124,8 +130,7 @@ header a span {
 	line-height: 0;
 }
 body.none #photos li {
-	margin: -25px 0 -70px;
-	line-height: 60px;
+	margin-top: -5px;
 }
 li > * {
 	line-height: 20px;
@@ -178,16 +183,13 @@ div a time {
 }
 ul.links {
 	max-width: 40em;
-	margin: 40px auto;
+	margin: 0 auto 40px;
 	padding: 0 15px;
 }
-#tags .all,
 #tags .etc,
-#tags.min li+li+li+li+li+li.tag,
-body.none .flickr {
+#tags.min li+li+li+li+li+li.tag {
 	display: none;
 }
-body.tagged #tags .all,
 ul.links li,
 #tags.min .etc {
 	display: inline-block;

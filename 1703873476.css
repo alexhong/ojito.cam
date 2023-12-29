@@ -28,6 +28,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 h2 {
+	color: #a0a0a0;
 	font-size: 100%;
 	margin-top: 20px;
 	padding: 11px 0 9px;
@@ -37,7 +38,7 @@ em {
 }
 body {
 	color: #c0c0c0;
-	background: #707070;
+	background: #606060;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px 0 80px;
@@ -52,7 +53,7 @@ body:before {
 	left: 0px;
 	bottom: 0px;
 	right: 0px;
-	background: linear-gradient(#909090,#707070);
+	background: linear-gradient(#808080 33%,#606060);
 }
 textarea {
 	font: 10px/15px Menlo, monospace;
@@ -138,10 +139,11 @@ li > * {
 }
 li p {
 	font-family: Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	margin: 6px auto 14px;
+	margin: -5px auto 25px;
 	padding: 20px;
 	max-width: 360px;
-	background: rgba(0,0,0,0.2);
+	background: linear-gradient(transparent,rgba(0,0,0,0.1) 66%);
+	box-shadow: 0 1px 0 rgba(255,255,255,0.1);
 	border-radius: 4px;
 }
 li p a {
@@ -151,7 +153,6 @@ div {
 	display: inline-block;
 	text-align: right;
 	padding: 60px 0 12px;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
 }
 div > * {
 	padding: 0 4px;

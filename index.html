@@ -18,7 +18,7 @@
 function ready() {
 	smartquotes();
 	if (window.location.href.slice(-1) === '?') {
-		history.pushState('','',window.location.pathname);
+		history.replaceState('','',window.location.pathname);
 	} else if (window.location.search === '?=') {
 		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
@@ -63,6 +63,8 @@ function jsonFlickrFeed(feed) {
 		$photos.innerHTML = '<li><em>no results</em></li>';
 		$tags.classList.remove('min');
 		return;
+	} else if (document.body.className === 'tagged') {
+		document.title = "ojito.cam: "+query;
 	}
 	feed.items.sort((a,b) => {
    		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
@@ -156,8 +158,9 @@ if (query && query.indexOf('=') < 0) {
 		? '&tagmode=all&tags='+query.replaceAll('+',',')
 		: '&tagmode=any&tags='+query
 	;
+	query = query.replaceAll('%20',' ');
 	document.body.className = 'tagged';
-	document.getElementById('h').innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
+	document.getElementById('h').innerHTML = '<a href="?"><span>'+query+'</span></a>';
 }
 const $script = document.createElement('script');
 $script.setAttribute('src',json);

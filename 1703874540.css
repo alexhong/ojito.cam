@@ -28,7 +28,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 h2 {
-	color: #a0a0a0;
+	color: rgba(255,255,255,0.33);
 	font-size: 100%;
 	margin-top: 20px;
 	padding: 11px 0 9px;

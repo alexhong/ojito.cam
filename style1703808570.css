@@ -120,6 +120,13 @@ header a span {
 #photos li {
 	line-height: 0;
 }
+#photos.none li {
+	margin: 15px 0 -70px;
+	line-height: 60px;
+}
+#photos.none em {
+	color: #fff;
+}
 li > * {
 	line-height: 20px;
 	text-align: left;

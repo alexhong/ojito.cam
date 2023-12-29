@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="1703817680.css">
+<link rel="stylesheet" href="1703825226.css">
 <script src="smartquotes.js"></script>
 <script>
 function ready() {
@@ -50,8 +50,7 @@ function jsonFlickrApi(obj) {
 		.sort(function(a,b){return a.count-b.count;})
 		.forEach((obj) => {
 			const $li = document.createElement('li');
-			$li.className = 'tag';
-			$li.append(a(obj._content,'?'+obj._content));
+			$li.append(a(obj._content,'?'+obj._content,0,obj.count+' photos'));
 			$tags.prepend($li);
 		})
 	;

@@ -187,7 +187,7 @@ ul.links {
 	padding: 0 15px;
 }
 #tags .etc,
-#tags.min li+li+li+li+li+li.tag {
+#tags.min li+li+li+li+li+li {
 	display: none;
 }
 ul.links li,

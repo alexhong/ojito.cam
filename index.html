@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="style1703808570.css">
+<link rel="stylesheet" href="1703809845.css">
 <script src="smartquotes.js"></script>
 <script>
 function ready() {
@@ -29,7 +29,7 @@ function ready() {
 <header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
 <ul id="tags" class="links min">
-	<li><a href=".">all</a></li><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li>
+	<li class="all"><a href=".">all</a></li><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li>
 </ul>
 <ul class="links">
 	<li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li>
@@ -60,7 +60,7 @@ function jsonFlickrApi(obj) {
 }
 function jsonFlickrFeed(feed) {
 	if (!feed.items.length) {
-		$photos.className = 'none';
+		document.body.className = 'none';
 		$photos.innerHTML = '<li><em>no results</em><br>try these?</li>';
 		$tags.classList.remove('min');
 		return;

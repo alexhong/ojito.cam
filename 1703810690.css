@@ -183,7 +183,8 @@ ul.links {
 }
 #tags .all,
 #tags .etc,
-#tags.min li+li+li+li+li+li+li.tag {
+#tags.min li+li+li+li+li+li.tag,
+body.none .flickr {
 	display: none;
 }
 body.tagged #tags .all,

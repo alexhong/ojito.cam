@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="1703809845.css">
+<link rel="stylesheet" href="1703810690.css">
 <script src="smartquotes.js"></script>
 <script>
 function ready() {
@@ -28,12 +28,8 @@ function ready() {
 <body class="search" onload="ready()">
 <header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.search=this.value"></span></header>
 <ul id="photos"></ul>
-<ul id="tags" class="links min">
-	<li class="all"><a href=".">all</a></li><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li>
-</ul>
-<ul class="links">
-	<li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li>
-</ul>
+<ul id="tags" class="links min"><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li></ul>
+<ul class="links flickr"><li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 
 <script>
 const $photos = document.getElementById('photos');
@@ -54,7 +50,7 @@ function jsonFlickrApi(obj) {
 			const $li = document.createElement('li');
 			$li.className = 'tag';
 			$li.append(a(obj._content,'?'+obj._content));
-			$tags.firstElementChild.after($li);
+			$tags.prepend($li);
 		})
 	;
 }

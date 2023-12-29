@@ -15,11 +15,11 @@
 <link rel="stylesheet" href="1703825226.css">
 <script src="smartquotes.js"></script>
 <script>
+if (window.location.href.slice(-1) === '?') 
+	history.replaceState('','',window.location.pathname);
 function ready() {
 	smartquotes();
-	if (window.location.href.slice(-1) === '?') {
-		history.replaceState('','',window.location.pathname);
-	} else if (window.location.search === '?=') {
+	if (window.location.search === '?=') {
 		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}

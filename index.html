@@ -17,7 +17,9 @@
 <script>
 function ready() {
 	smartquotes();
-	if (window.location.search === '?=') {
+	if (window.location.href.slice(-1) === '?') {
+		history.pushState('','',window.location.pathname);
+	} else if (window.location.search === '?=') {
 		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
@@ -26,12 +28,12 @@ function ready() {
 </head>
 
 <body class="search" onload="ready()">
-<header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.search=this.value"></span></header>
+<header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></span></header>
 <ul id="photos"></ul>
 <h2>popular tags</h2>
 <ul id="tags" class="links min"><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li></ul>
 <h2>all photos</h2>
-<ul class="links flickr"><li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
+<ul class="links"><li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 
 <script>
 const $photos = document.getElementById('photos');

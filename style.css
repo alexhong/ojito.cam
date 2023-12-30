@@ -38,22 +38,10 @@ em {
 }
 body {
 	color: #c0c0c0;
-	background: #666;
+	background: #808080;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px 0 80px;
-}
-/* iOS bg fix */
-body:before {
-	content: '';
-	position: fixed;
-	z-index: -1;
-	display: block;
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	background: linear-gradient(#808080 33%,#666);
 }
 textarea {
 	font: 10px/15px Menlo, monospace;

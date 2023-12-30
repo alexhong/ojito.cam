@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="style.css?1703959097">
+<link rel="stylesheet" href="style.css?1703961507">
 <script src="smartquotes.js"></script>
 <script>
 if (window.location.href.slice(-1) === '?') 
@@ -27,7 +27,7 @@ function ready() {
 </script>
 </head>
 
-<body class="search" onload="ready()">
+<body onload="ready()">
 <header>
 	<span><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></span>
 </header>
@@ -38,7 +38,7 @@ function ready() {
 	<h2>popular tags</h2>
 	<ul id="tags" class="min"><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li></ul>
 	<h2>all photos</h2>
-	<ul><li><a href="https://www.flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
+	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
 <script>
 const $photos = document.getElementById('photos');
@@ -64,8 +64,7 @@ function jsonFlickrApi(obj) {
 }
 function jsonFlickrFeed(feed) {
 	if (!feed.items.length) {
-		document.body.className = 'none';
-		$photos.innerHTML = '<li><em>no results</em></li>';
+		$photos.innerHTML = '<li class="none">no results</li>';
 		$tags.classList.remove('min');
 		return;
 	} else if (document.body.className === 'tagged') {

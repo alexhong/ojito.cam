@@ -12,7 +12,7 @@
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="me" href="https://mastodon.social/@ojito">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="style.css?1703908024">
+<link rel="stylesheet" href="style.css?1703910676">
 <script src="smartquotes.js"></script>
 <script>
 if (window.location.href.slice(-1) === '?') 
@@ -21,15 +21,17 @@ function ready() {
 	smartquotes();
 	if (window.location.search === '?=') {
 		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
-		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
+		document.body.innerHTML = `<main><textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea></main>`;
 	}
 }
 </script>
 </head>
 
 <body class="search" onload="ready()">
+<main>
 <header id="h"><span><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></span></header>
 <ul id="photos"></ul>
+</main>
 <h2>popular tags</h2>
 <ul id="tags" class="links min"><li class="etc"><a href="#tags" onclick="$tags.classList.remove('min')">...</a></li></ul>
 <h2>all photos</h2>

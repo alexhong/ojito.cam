@@ -67,8 +67,9 @@ function jsonFlickrFeed(feed) {
 		$photos.innerHTML = '<li class="none">no results</li>';
 		$tags.classList.remove('min');
 		return;
-	} else if (document.body.className === 'tagged') {
+	} else if (query && query.indexOf('=') < 0) {
 		document.title = "ojito.cam: "+query;
+		document.body.className = 'tagged';
 	}
 	feed.items.sort((a,b) => {
    		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
@@ -163,7 +164,6 @@ if (query && query.indexOf('=') < 0) {
 		: '&tagmode=any&tags='+query
 	;
 	query = query.replaceAll('%20',' ');
-	document.body.className = 'tagged';
 	document.body.firstElementChild.innerHTML = '<a href="?"><span>'+query+'</span></a>';
 }
 const $script = document.createElement('script');

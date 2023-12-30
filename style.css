@@ -28,7 +28,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 h2 {
-	color: #909090;
+	opacity: 0.5;
 	font-size: 100%;
 	padding: 11px 0 9px;
 }
@@ -37,19 +37,25 @@ em {
 }
 body {
 	color: #c0c0c0;
-	background: #606060;
+	background: #808080;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
-	padding-bottom: 40px;
+}
+section {
+	padding: 20px;
 }
 main {
+	position: relative;
 	background: #808080;
 	padding: 20px 20px 40px;
-	margin-bottom: 40px;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 body.none main {
 	padding-bottom: 0;
+}
+footer {
+	padding: 40px 0;
+	background: linear-gradient(#606060,#707070);
 }
 textarea {
 	font: 10px/15px Menlo, monospace;

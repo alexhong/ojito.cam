@@ -38,7 +38,7 @@ em {
 }
 body {
 	color: #c0c0c0;
-	background: #606060;
+	background: #666;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 	padding: 20px 0 80px;
@@ -53,7 +53,7 @@ body:before {
 	left: 0px;
 	bottom: 0px;
 	right: 0px;
-	background: linear-gradient(#808080 33%,#606060);
+	background: linear-gradient(#808080 33%,#666);
 }
 textarea {
 	font: 10px/15px Menlo, monospace;

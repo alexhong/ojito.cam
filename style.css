@@ -28,7 +28,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 h2 {
-	color: rgba(255,255,255,0.33);
+	color: #a0a0a0;
 	font-size: 100%;
 	margin-top: 20px;
 	padding: 11px 0 9px;
@@ -53,9 +53,6 @@ textarea {
 a { 
 	text-decoration: none;
 	color: inherit;
-}
-div a {
-	color: rgba(255,255,255,0.5);
 }
 a:hover,
 a:focus {

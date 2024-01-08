@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#000">
+<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
+<title>ojito.cam: tags</title>
+<base href="../">
+<link rel="apple-touch-icon" href="icons/ojito-180.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="manifest" href="icons/manifest.webmanifest">
+<link rel="stylesheet" href="cps/stylesheet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="alltags">
+<footer>
+	<h2>all tags</h2>
+	<ul id="tags"></ul>
+	<h2>all photos</h2>
+	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
+</footer>
+<script>
+function jsonFlickrApi(obj) {
+	obj.who.tags.tag.forEach((obj) => {
+		if (obj.count > 1 && obj._content.slice(0,3) !== 'dmc') {
+			const $li = document.createElement('li');
+			const $a = document.createElement('a');
+			$a.append(obj._content);
+			$a.setAttribute('href','?'+obj._content);
+			$a.setAttribute('title',obj.count+' photos');
+			$li.append($a);
+			document.getElementById('tags').append($li);
+		}
+	});
+}
+</script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=100&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+</body>
+
+</html>

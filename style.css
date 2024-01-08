@@ -37,6 +37,9 @@ body {
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 }
+body.alltags {
+	background: #707070;
+}
 a { 
 	text-decoration: none;
 	color: inherit;

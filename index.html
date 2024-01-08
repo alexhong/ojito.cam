@@ -116,17 +116,10 @@ function jsonFlickrFeed(feed) {
 			$div.append(' ',$perma);
 		}
 
-		let tags = item.tags.split(' '),
-			model = tags[0], 
-			brand = tags[1],
-			sub = tags[2],
-			last = tags.pop();
-		if (model && brand) {
-			let m = [model], path = 0;
-			switch(sub) {
-				case 'dimage': case 'optio': case 'stylus':
-					m[0] = [sub+model];
-			}
+		if (item.tags.indexOf(' ') > 0) {
+			const [model, brand, sub, ...tags] = item.tags.split(' ');
+			let path = 0, 
+				m = (['dimage','optio','stylus'].includes(sub)) ? [sub+model] : [model];
 			switch(model) {
 				case 'j1250':	path = '//www.digicamdb.com/specs/ge_j1250/'; break;
 				case 'r827':	path = '//www.digicamdb.com/specs/hp_photosmart-r827/'; break;
@@ -138,18 +131,18 @@ function jsonFlickrFeed(feed) {
 				case 'uca401':	m[1] = 'U-CA 401'; break;
 				case 'verve':	m[1] = 'Verve'; break;
 				case 'verves':	m[1] = 'Verve S'; break;
-				default: 
-					if (sub === 'stylus') m[1] = 'µ-'+model;
+				default: if (sub === 'stylus') m[1] = 'µ-'+model;
 			}
-			if (m.length < 2) 
-				m[1] = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
+			if (!m[1]) m[1] = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
 			if (!path) {
 				path = `//www.dpreview.com/products/${brand}/compacts/`;
 				path += (brand === 'olympus') ? 'oly_'+m[0] : brand+'_'+m[0];
 			}
 			$div.append(' ',a(m[1],path));
-			if (last === 'fs') $div.append(a('(FS)','//en.wikipedia.org/wiki/Full-spectrum_photography'));
-			if (last === 'ir') $div.append(a('(IR)','//en.wikipedia.org/wiki/Infrared_photography'));
+			switch (true) {
+				case tags.includes('fs'): $div.append(a('(FS)','//en.wikipedia.org/wiki/Full-spectrum_photography')); break;
+				case tags.includes('ir'): $div.append(a('(IR)','//en.wikipedia.org/wiki/Infrared_photography')); break;
+			}
 		}
 
 		const $li = document.createElement('li');

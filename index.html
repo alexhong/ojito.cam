@@ -87,33 +87,26 @@ function jsonFlickrFeed(feed) {
 		$time.setAttribute('title',timestamp.slice(11,16));
 		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
 
-		let $at = false, desc = false,
-			$desc = document.createElement('li'),
+		let $at = 0, $desc = 0,
 			p = item.description.split('<p>');
 		if (p.length > 3 && p[3].trim() !== '</p>') {
+			$desc = document.createElement('li');
 			$desc.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
 			p = $desc.firstChild.childNodes;
 			if (p.length === 1 && p[0].tagName === 'A') {
-				$at = p[0];
-				$at.className = 'at';
-				$at.setAttribute('title',$at.textContent);
-				$at.textContent = '@';
-			} else {
-				desc = true;
+				$at = a('@',p[0].getAttribute("href"),'at',p[0].textContent);
+				$desc = 0;
 			}
 		}
 
 		const $perma = a($time,item.link.slice(6),'perma');
 		const title = item.title.trim();
-		if (title[0] === '@') {
-			$div.append(' ',$perma,' ',a('@','//www.instagram.com/'+title.slice(1)+'/','at insta',title));
-		} else if ($at) {
-			$div.append(' ',$perma,' ',$at);
-		} else if (title) {
-			$perma.append(' ',title);
-			$div.append(' ',$perma);
-		} else {
-			$div.append(' ',$perma);
+		if (!$at && title[0] === '@')
+			$at = a('@','//www.instagram.com/'+title.slice(1)+'/','at insta',title);
+		switch (true) {
+			case !!$at: 	$div.append(' ',$perma,' ',$at); break;
+			case !!title:	$perma.append(' ',title);
+			default:    	$div.append(' ',$perma);
 		}
 
 		if (item.tags.indexOf(' ') > 0) {
@@ -148,7 +141,7 @@ function jsonFlickrFeed(feed) {
 		const $li = document.createElement('li');
 		$li.append($div);
 		$photos.append($li,'\n');
-		if (desc) $photos.append($desc,'\n');
+		if ($desc) $photos.append($desc,'\n');
 	}
 }
 

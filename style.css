@@ -187,12 +187,7 @@ footer ul {
 	margin: 0 auto 40px;
 	padding: 0 15px;
 }
-.etc,
-.min li+li+li+li+li+li {
-	display: none;
-}
-footer li,
-.min .etc {
+footer li {
 	display: inline-block;
 }
 footer a {

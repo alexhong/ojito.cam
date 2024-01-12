@@ -114,13 +114,14 @@ function jsonFlickrFeed(feed) {
 			let path = 0, 
 				m = (['dimage','optio','stylus'].includes(sub)) ? [sub+model] : [model];
 			switch(model) {
-				case 'j1250':	path = '//www.digicamdb.com/specs/ge_j1250/'; break;
-				case 'r827':	path = '//www.digicamdb.com/specs/hp_photosmart-r827/'; break;
 				case 'd595':	m = ['d595z','D-595']; break;
 				case 'dct50':	m[1] = 'DC-T50'; path = '//www.dpreview.com/articles/0053585370/gatewaydigicams'; break;
 				case 'griiix':	m[1] = 'GR IIIx'; break;
+				case 'j1250':	path = '//www.digicamdb.com/specs/ge_j1250/'; break;
 				case 'kd300z':	m[1] = 'KD-300Z'; break;
 				case 'pdr3310':	m[1] = 'PDR-3310'; break;
+				case 'r827':	path = '//www.digicamdb.com/specs/hp_photosmart-r827/'; break;
+				case 'sl300rt':	path = '//www.digicamdb.com/specs/contax_sl300r-t/'; break;
 				case 'uca401':	m[1] = 'U-CA 401'; break;
 				case 'verve':	m[1] = 'Verve'; break;
 				case 'verves':	m[1] = 'Verve S'; break;

@@ -20,7 +20,8 @@ if (window.location.href.slice(-1) === '?')
 function ready() {
 	smartquotes();
 	if (window.location.search === '?=') {
-		const output = $photos.innerHTML.replaceAll('&','&amp;'), lines = output.split('\n').length;
+		let output = $photos.innerHTML.replaceAll('&','&amp;'),
+			lines = output.split('\n').length;
 		document.body.innerHTML = `<section><textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea></section>`;
 	}
 }
@@ -42,38 +43,35 @@ function ready() {
 </footer>
 <script>
 const $photos = document.getElementById('photos');
-const $tags = document.getElementById('tags');
 
-function a(text,url,c,title) {
+function a(content,url,cls,title) {
 	const $a = document.createElement('a');
-	$a.append(text);
+	$a.append(content);
 	$a.setAttribute('href',(url.slice(0,2)==='//')?'https:'+url:url);
-	if (c) $a.className = c;
+	if (cls) $a.className = cls;
 	if (title) $a.setAttribute('title',title);
 	return $a;
 }
 function jsonFlickrApi(obj) {
-	obj.who.tags.tag
-		.sort(function(a,b){return a.count-b.count;})
-		.forEach((obj) => {
-			const $li = document.createElement('li');
-			$li.append(a(obj._content,'?'+obj._content,0,obj.count+' photos'));
-			$tags.prepend($li);
-		})
-	;
+	const _tags = new DocumentFragment();
+	obj.who.tags.tag.sort((a,b) => b.count-a.count);
+	for (const tag of obj.who.tags.tag) {
+		const $li = document.createElement('li');
+		$li.append(a(tag._content,'?'+tag._content,0,tag.count+' photos'));
+		_tags.append($li);
+	}
+	document.getElementById('tags').prepend(_tags);
 }
 function jsonFlickrFeed(feed) {
 	if (!feed.items.length) {
 		$photos.innerHTML = '<li class="none">no results</li>';
-		$tags.classList.remove('min');
 		return;
 	} else if (query && query.indexOf('=') < 0) {
 		document.title = "ojito.cam: "+query;
 		document.body.className = 'tagged';
 	}
-	feed.items.sort((a,b) => {
-   		return Date.parse(b.date_taken) - Date.parse(a.date_taken);
-	});
+	const _main = new DocumentFragment();
+	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
 	for (const item of feed.items) {
 		const $div = document.createElement('div');
 		const $img = document.createElement('img');
@@ -110,24 +108,23 @@ function jsonFlickrFeed(feed) {
 		}
 
 		if (item.tags.indexOf(' ') > 0) {
-			const [model, brand, sub, ...tags] = item.tags.split(' ');
-			let path = 0, 
-				m = (['dimage','optio','stylus'].includes(sub)) ? [sub+model] : [model];
+			const [model, brand, line, ...tags] = item.tags.split(' ');
+			let path = 0, db = '//www.digicamdb.com/specs/',
+				m = (['dimage','optio','stylus'].includes(line)) ? [line+model] : [model];
 			switch(model) {
+				case 'dct50':	path = '//www.dpreview.com/articles/0053585370/gatewaydigicams'; break;
+				case 'j1250':	path = db+'ge_j1250/'; break;
+				case 'r827':	path = db+'hp_photosmart-r827/'; break;
+				case 'sl300rt':	path = db+'contax_sl300r-t/'; break;
 				case 'd595':	m = ['d595z','D-595']; break;
-				case 'dct50':	m[1] = 'DC-T50'; path = '//www.dpreview.com/articles/0053585370/gatewaydigicams'; break;
-				case 'griiix':	m[1] = 'GR IIIx'; break;
-				case 'j1250':	path = '//www.digicamdb.com/specs/ge_j1250/'; break;
-				case 'kd300z':	m[1] = 'KD-300Z'; break;
-				case 'pdr3310':	m[1] = 'PDR-3310'; break;
-				case 'r827':	path = '//www.digicamdb.com/specs/hp_photosmart-r827/'; break;
-				case 'sl300rt':	path = '//www.digicamdb.com/specs/contax_sl300r-t/'; break;
-				case 'uca401':	m[1] = 'U-CA 401'; break;
-				case 'verve':	m[1] = 'Verve'; break;
-				case 'verves':	m[1] = 'Verve S'; break;
-				default: if (sub === 'stylus') m[1] = 'µ-'+model;
+				case 'griiix':	m[1] = 'GR IIIx';	break;
+				case 'kd300z':	m[1] = 'KD-300Z';	break;
+				case 'uca401':	m[1] = 'U-CA 401';	break;
+				case 'verve':	m[1] = 'Verve';		break;
+				case 'verves':	m[1] = 'Verve S';	break;
+				default: if (line === 'stylus') m[1] = 'µ-'+model;
 			}
-			if (!m[1]) m[1] = model.toUpperCase().replace(/^(D[MS]C)/,'$1-');
+			if (!m[1]) m[1] = model.toUpperCase().replace(/^(DC|DMC|DSC|PDR)/,'$1-');
 			if (!path) {
 				path = `//www.dpreview.com/products/${brand}/compacts/`;
 				path += (brand === 'olympus') ? 'oly_'+m[0] : brand+'_'+m[0];
@@ -141,9 +138,10 @@ function jsonFlickrFeed(feed) {
 
 		const $li = document.createElement('li');
 		$li.append($div);
-		$photos.append($li,'\n');
-		if ($desc) $photos.append($desc,'\n');
+		_main.append($li,'\n');
+		if ($desc) _main.append($desc,'\n');
 	}
+	$photos.append(_main);
 }
 
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
@@ -159,6 +157,8 @@ if (query && query.indexOf('=') < 0) {
 const $script = document.createElement('script');
 $script.setAttribute('src',json);
 document.body.append($script);
+
+console.log(json);
 </script>
 <script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=20&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>

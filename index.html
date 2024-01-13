@@ -10,109 +10,99 @@
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
-<link rel="me" href="https://mastodon.social/@ojito">
-<link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="style.css?1704847373">
+<link rel="stylesheet" href="style.css?1705169386">
 <script src="smartquotes.js"></script>
-<script>
-if (window.location.href.slice(-1) === '?') 
-	history.replaceState('','',window.location.pathname);
-function ready() {
-	smartquotes();
-	if (window.location.search === '?=') {
-		let output = $photos.innerHTML.replaceAll('&','&amp;'),
-			lines = output.split('\n').length;
-		document.body.innerHTML = `<section><textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea></section>`;
-	}
-}
-</script>
+<script>if (window.location.href.slice(-1) === '?') history.replaceState('','',window.location.pathname);</script>
 </head>
 
-<body onload="ready()">
+<body>
 <header>
-	<span><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></span>
+	<nav><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></nav>
 </header>
-<main>
-	<ul id="photos"></ul>
-</main>
+<main id="main"></main>
 <footer>
 	<h2>popular tags</h2>
 	<ul id="tags"><li><a href="tags/">...</a></li></ul>
 	<h2>all photos</h2>
 	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
+<template id="temp">
+	<article><div>
+		<img alt="">
+		<a class="perma"><time datetime=""></time></a>
+		<a class="at">@</a>
+		<a class="cam"></a><a href="https://en.wikipedia.org/wiki/"></a>
+	</div><p></p></article>
+</template>
 <script>
-const $photos = document.getElementById('photos');
+let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
+const query = window.location.search.slice(1);
+const search = (query && query.indexOf('=') < 0) ? true : false;
 
-function a(content,url,cls,title) {
-	const $a = document.createElement('a');
-	$a.append(content);
-	$a.setAttribute('href',(url.slice(0,2)==='//')?'https:'+url:url);
-	if (cls) $a.className = cls;
-	if (title) $a.setAttribute('title',title);
-	return $a;
-}
-function jsonFlickrApi(obj) {
-	const _tags = new DocumentFragment();
-	obj.who.tags.tag.sort((a,b) => b.count-a.count);
-	for (const tag of obj.who.tags.tag) {
-		const $li = document.createElement('li');
-		$li.append(a(tag._content,'?'+tag._content,0,tag.count+' photos'));
-		_tags.append($li);
+function main() {
+	if (search) {
+		json += (query.indexOf('+') > 0) 
+			? '&tagmode=all&tags='+query.replaceAll('+',',')
+			: '&tagmode=any&tags='+query
+		;
+		document.body.children[0].innerHTML = '<a href="?"><span>'+query.replaceAll('%20',' ')+'</span></a>';
 	}
-	document.getElementById('tags').prepend(_tags);
+	const $script = document.createElement('script');
+	console.log($script.src = json);
+	document.body.append($script);
 }
+
 function jsonFlickrFeed(feed) {
-	if (!feed.items.length) {
-		$photos.innerHTML = '<li class="none">no results</li>';
-		return;
-	} else if (query && query.indexOf('=') < 0) {
-		document.title = "ojito.cam: "+query;
-		document.body.className = 'tagged';
+	const $main = document.getElementById('main');
+	const temp = document.getElementById('temp');
+	switch(true) {
+		case !'content' in temp: $main.innerHTML = '<p>&lt;template&gt; unsupported</p>'; return;
+		case !feed.items.length: $main.innerHTML = '<p>no results</p>'; return;
+		case search:
+			document.title = 'ojito.cam: '+query;
+			document.body.className = 'search';
 	}
 	const _main = new DocumentFragment();
 	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
 	for (const item of feed.items) {
-		const $div = document.createElement('div');
-		const $img = document.createElement('img');
-		$img.setAttribute('src',item.media.m.slice(0,-5)+'b.jpg');
-		$img.setAttribute('alt','');
-		$div.append($img);
+		const $article = temp.content.children[0].cloneNode(true),
+			[$img,$perma,$at,$cam,$mod] = $article.children[0].children,
+			$p = $article.children[1],
+			$time = $perma.children[0],
+			taken = item.date_taken;
 
-		const $time = document.createElement('time');
-		const timestamp = item.date_taken;
-		$time.setAttribute('datetime',timestamp);
-		$time.setAttribute('title',timestamp.slice(11,16));
-		$time.textContent = timestamp.slice(0,10).replaceAll('-','.');
+		$img.src = item.media.m.slice(0,-5)+'b.jpg';
+		$perma.href = item.link;
+		$time.dateTime = taken;
+		$time.textContent = taken.slice(0,10).replaceAll('-','.');
+		$time.title = taken.slice(11,16);
 
-		let $at = 0, $desc = 0,
-			p = item.description.split('<p>');
-		if (p.length > 3 && p[3].trim() !== '</p>') {
-			$desc = document.createElement('li');
-			$desc.innerHTML = '<p>'+p[3].trim().replaceAll('="/',`="${feed.generator}/`);
-			p = $desc.firstChild.childNodes;
-			if (p.length === 1 && p[0].tagName === 'A') {
-				$at = a('@',p[0].getAttribute("href"),'at',p[0].textContent);
-				$desc = 0;
-			}
+		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
+		smartquotes($p);
+		const n = $p.childNodes,
+			title = item.title.trim();
+		if (title[0] === '@') {
+			$at.href = 'https://www.instagram.com/'+title.slice(1)+'/';
+			$at.title = title;
+		} else if (title) {
+			$perma.append(' ',title);
+		} else if (n.length === 1 && n[0].tagName === 'A') {
+			$at.href = n[0].href;
+			$at.title = n[0].textContent;
+			$p.remove();
 		}
 
-		const $perma = a($time,item.link.slice(6),'perma');
-		const title = item.title.trim();
-		if (!$at && title[0] === '@')
-			$at = a('@','//www.instagram.com/'+title.slice(1)+'/','at insta',title);
-		switch (true) {
-			case !!$at: 	$div.append(' ',$perma,' ',$at); break;
-			case !!title:	$perma.append(' ',title);
-			default:    	$div.append(' ',$perma);
-		}
-
-		if (item.tags.indexOf(' ') > 0) {
+		if (!$at.href) $at.remove();
+		if (!n.length) $p.remove();
+		if (!item.tags.indexOf(' ')) {
+			$cam.remove();
+			$mod.remove();
+		} else {
 			const [model, brand, line, ...tags] = item.tags.split(' ');
-			let path = 0, db = '//www.digicamdb.com/specs/',
+			let path = 0, db = 'digicamdb.com/specs/',
 				m = (['dimage','optio','stylus'].includes(line)) ? [line+model] : [model];
 			switch(model) {
-				case 'dct50':	path = '//www.dpreview.com/articles/0053585370/gatewaydigicams'; break;
+				case 'dct50':	path = 'dpreview.com/articles/0053585370/gatewaydigicams'; break;
 				case 'j1250':	path = db+'ge_j1250/'; break;
 				case 'r827':	path = db+'hp_photosmart-r827/'; break;
 				case 'sl300rt':	path = db+'contax_sl300r-t/'; break;
@@ -126,39 +116,41 @@ function jsonFlickrFeed(feed) {
 			}
 			if (!m[1]) m[1] = model.toUpperCase().replace(/^(DC|DMC|DSC|PDR)/,'$1-');
 			if (!path) {
-				path = `//www.dpreview.com/products/${brand}/compacts/`;
+				path = `dpreview.com/products/${brand}/compacts/`;
 				path += (brand === 'olympus') ? 'oly_'+m[0] : brand+'_'+m[0];
 			}
-			$div.append(' ',a(m[1],path));
+			$cam.href = 'https://www.'+path;
+			$cam.textContent = m[1];
 			switch (true) {
-				case tags.includes('fs'): $div.append(a('(FS)','//en.wikipedia.org/wiki/Full-spectrum_photography')); break;
-				case tags.includes('ir'): $div.append(a('(IR)','//en.wikipedia.org/wiki/Infrared_photography')); break;
+				case tags.includes('fs'): $mod.textContent = '(FS)'; $mod.href += 'Full-spectrum_photography'; break;
+				case tags.includes('ir'): $mod.textContent = '(IR)'; $mod.href += 'Infrared_photography'; break;
+				default: $mod.remove();
 			}
 		}
-
-		const $li = document.createElement('li');
-		$li.append($div);
-		_main.append($li,'\n');
-		if ($desc) _main.append($desc,'\n');
+		_main.append($article,'\n');
 	}
-	$photos.append(_main);
+	$main.append(_main);
+	if (query === '=') {
+		document.body.className = 'textarea';
+		let output = $main.innerHTML.replaceAll('&','&amp;').replaceAll('\n\t',''),
+			lines = output.split('\n').length;
+		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
+	}
 }
 
-let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json',
-	query = window.location.search.slice(1);
-if (query && query.indexOf('=') < 0) {
-	json += (query.indexOf('+') > 0) 
-		? '&tagmode=all&tags='+query.replaceAll('+',',')
-		: '&tagmode=any&tags='+query
-	;
-	query = query.replaceAll('%20',' ');
-	document.body.firstElementChild.innerHTML = '<a href="?"><span>'+query+'</span></a>';
+function jsonFlickrApi(obj) {
+	if (query === '=') return;
+	const _tags = new DocumentFragment();
+	obj.who.tags.tag.sort((a,b) => b.count-a.count);
+	for (const tag of obj.who.tags.tag) {
+		const $li = document.createElement('li');
+		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos">${tag._content}</a>`
+		_tags.append($li);
+	}
+	document.getElementById('tags').prepend(_tags);
 }
-const $script = document.createElement('script');
-$script.setAttribute('src',json);
-document.body.append($script);
 
-console.log(json);
+main();
 </script>
 <script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=20&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>

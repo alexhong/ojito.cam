@@ -1,64 +1,69 @@
-/* rubik-regular - latin */
 @font-face {
-  font-family: 'Rubik';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('fonts/rubik-v21-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/rubik-v21-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	font-family: 'Courier Prime Sans';
+	font-weight: normal; font-style: normal;
+	src: local('Courier Prime Sans'), local('CourierPrimeSans-Regular'),
+		url('fonts/cps-regular.woff2') format('woff2'), 
+		url('fonts/cps-regular.woff') format('woff');
 }
-/* rubik-700 - latin */
 @font-face {
-  font-family: 'Rubik';
-  font-style: normal;
-  font-weight: 700;
-  src: local(''),
-       url('fonts/rubik-v21-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/rubik-v21-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	font-family: 'Rubik';
+	font-weight: normal; font-style: normal;
+	src: local('Rubik Regular'), local('Rubik-Regular'),
+		url('fonts/rubik-regular.woff2') format('woff2'),
+		url('fonts/rubik-regular.woff') format('woff');
+}
+@font-face {
+	font-family: 'Rubik';
+	font-weight: normal; font-style: italic;
+	src: local('Rubik Italic'), local('Rubik-Italic'),
+		url('fonts/rubik-italic.woff2') format('woff2'),
+		url('fonts/rubik-italic.woff') format('woff');
+}
+@font-face {
+	font-family: 'Rubik';
+	font-weight: bold; font-style: normal; 
+	src: local('Rubik Bold'), local('Rubik-Bold'),
+		url('fonts/rubik-bold.woff2') format('woff2'),
+		url('fonts/rubik-bold.woff') format('woff');
+}
+@font-face {
+	font-family: 'Rubik';
+	font-weight: bold; font-style: italic;
+	src: local('Rubik Bold Italic'), local('Rubik-BoldItalic'),
+		url('fonts/rubik-bolditalic.woff2') format('woff2'),
+		url('fonts/rubik-bolditalic.woff') format('woff');
 }
 
-* { 
+* {
 	margin: 0; 
 	padding: 0;
 	border-radius: 0;
 	outline: none;
-	font-weight: normal;
-	font-style: normal;
 	list-style: none;
 	-webkit-text-size-adjust: 100%;
 }
-header > *,
-footer a {
-	border-radius: 10px 4px 10px 4px;	
-}
+a { color: inherit; text-decoration: none; }
+a:hover, a:focus { color: #fff; }
+p a { text-decoration: underline; }
+header > *, footer a { border-radius: 10px 4px 10px 4px; }
+
 body {
 	color: #c0c0c0;
 	background: #808080;
 	font: 15px/20px 'Courier Prime Sans', Courier, monospace;
 	text-align: center;
 }
-body.alltags {
-	background: #707070;
-}
-a { 
-	text-decoration: none;
-	color: inherit;
-}
-a:hover,
-a:focus {
-	color: #fff; 
-}
-section {
-	padding: 20px;
-}
+body.search header { position: fixed; }
+body.tags { background: #707070; }
+body.textarea { padding: 20px; }
 textarea {
 	font: 10px/15px Menlo, monospace;
+	box-sizing: border-box;
 	width: 100%;
 	padding: 5px;
-	margin-bottom: -20px;
-	box-sizing: border-box;
 	white-space: nowrap;
 }
+
 header {
 	position: absolute;
 	top: 20px;
@@ -68,11 +73,7 @@ header {
 	white-space: nowrap;
 	line-height: 0;
 }
-body.tagged header {
-	position: fixed;
-}
-header > span {
-	display: block;
+nav {
 	width: 119px;
 	margin: 0 auto;	
 	padding: 11px 12px 9px 33px;
@@ -110,32 +111,25 @@ header a span {
 	background: url(icons/icon-x.png) right 1px no-repeat;
 	background-size: 15px 15px;
 }
+
 main {
 	position: relative;
 	background: #808080;
 	padding: 40px 20px 60px;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-main li {
-	line-height: 0;
-}
-li.none,
-li > * {
-	line-height: 20px;
-}
-li.none {
+main > p {
 	position: relative;
 	top: 40px;
 }
+
 div {
 	display: inline-block;
 	text-align: right;
 	padding: 60px 0 12px;
 }
-div > * {
-	padding: 0 4px;
-}
-div > img {
+div > * { padding: 0 4px; }
+div img {
 	display: block;
 	padding: 0;
 	margin-bottom: 8px;
@@ -145,23 +139,20 @@ div > img {
 	border: 4px solid #fff;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-div > a {
-	white-space: nowrap;
-}
+div a { white-space: nowrap; }
 div a.perma,
 div a.at {
 	text-align: left;
 	float: left;
 }
-div a.at {
-	font-size: 18px;
-	margin-top: -1px;
-}
-div a time {
-	display: block;
-}
-li p {
+div time { display: block; }
+div a.at { margin-top: -1px; }
+div a.at,
+article p {
 	font-family: Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+article p {
+	clear: both;
 	text-align: left;
 	margin: -5px auto 25px;
 	padding: 20px;
@@ -170,9 +161,7 @@ li p {
 	box-shadow: 0 1px 0 rgba(255,255,255,0.1);
 	border-radius: 4px;
 }
-li p a {
-	text-decoration: underline;
-}
+
 footer {
 	padding: 40px 0;
 	background: linear-gradient(#606060,#707070);
@@ -180,6 +169,7 @@ footer {
 footer h2 {
 	opacity: 0.5;
 	font-size: 100%;
+	font-weight: normal;
 	padding: 11px 0 9px;
 }
 footer ul {

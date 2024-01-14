@@ -19,7 +19,7 @@
 <header>
 	<nav><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></nav>
 </header>
-<main id="main"></main>
+<main id="main"><p>loading…</p></main>
 <footer>
 	<h2>popular tags</h2>
 	<ul id="tags"><li><a href="tags/">...</a></li></ul>
@@ -39,7 +39,7 @@ let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100
 const query = window.location.search.slice(1),
 	  search = (query && query.indexOf('=') < 0) ? true : false;
 
-function main() {
+function load() {
 	if (search) {
 		json += (query.indexOf('+') > 0) 
 			? '&tagmode=all&tags='+query.replaceAll('+',',')
@@ -55,10 +55,11 @@ function main() {
 function jsonFlickrFeed(feed) {
 	const _main = new DocumentFragment();
 		  $main = document.getElementById('main'),
+		  $stat = $main.children[0],
 		  temp = document.getElementById('temp');
 	switch(true) {
-		case !'content' in temp: $main.innerHTML = '<p>&lt;template&gt; unsupported</p>'; return;
-		case !feed.items.length: $main.innerHTML = '<p>no results</p>'; return;
+		case !'content' in temp: $stat.textContent = '<template> unsupported'; return;
+		case !feed.items.length: $stat.textContent = 'no results'; return;
 		case search:
 			document.title = 'ojito.cam: '+query;
 			document.body.className = 'search';
@@ -135,11 +136,11 @@ function jsonFlickrFeed(feed) {
 		}
 		_main.append($article,'\n');
 	}
-	$main.append(_main);
+	$stat.replaceWith(_main);
 	if (query === '=') {
-		document.body.className = 'textarea';
 		const output = $main.innerHTML.replaceAll('&','&amp;').replaceAll('\n\t',''),
 			  lines = output.split('\n').length;
+		document.body.className = 'textarea';
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
 }
@@ -156,7 +157,7 @@ function jsonFlickrApi(obj) {
 	document.getElementById('tags').prepend(_tags);
 }
 
-main();
+load();
 </script>
 <script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=20&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>

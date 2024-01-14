@@ -45,7 +45,7 @@ function main() {
 			? '&tagmode=all&tags='+query.replaceAll('+',',')
 			: '&tagmode=any&tags='+query
 		;
-		document.body.children[0].innerHTML = '<a href="?"><span>'+query.replaceAll('%20',' ')+'</span></a>';
+		document.body.children[0].innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
 	}
 	const $script = document.createElement('script');
 	console.log($script.src = json);
@@ -69,17 +69,18 @@ function jsonFlickrFeed(feed) {
 			  [$img,$perma,$at,$cam,$mod] = $article.children[0].children,
 			  $time = $perma.children[0],
 			  taken = item.date_taken,
+			  title = item.title.trim(),
 			  $p = $article.children[1];
 
 		$img.src = item.media.m.slice(0,-5)+'b.jpg';
 		$perma.href = item.link;
-		if (item.title.trim()) $perma.append(' ',item.title);
 		$time.dateTime = taken;
 		$time.textContent = taken.slice(0,10).replaceAll('-','.');
 		$time.title = taken.slice(11,16);
+		if (title) $perma.append(' ',title);
 
 		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
-		if ($p.textContent[0] === '@') {
+		if (!title && $p.textContent[0] === '@') {
 			const text = $p.firstChild.textContent.slice(1).trim(),
 				  next = $p.childNodes[1],
 				  link = next && next.nodeName === 'A';
@@ -99,16 +100,16 @@ function jsonFlickrFeed(feed) {
 			while ($p.firstChild && ($p.firstChild.nodeName === 'BR' || $p.firstChild.nodeValue === ' ')) 
 				$p.firstChild.remove();
 		}
-
 		if (!$at.href) $at.remove();
 		$p.hasChildNodes() ? smartquotes($p) : $p.remove();
+
 		if (!item.tags.indexOf(' ')) {
 			$cam.remove();
 			$mod.remove();
 		} else {
-			const [model, brand, line, ...tags] = item.tags.split(' ');
+			const [model, brand, third, ...tags] = item.tags.split(' ');
 			let path = 0, db = 'digicamdb.com/specs/',
-				m = ['dimage','optio','stylus'].includes(line) ? [line+model] : [model];
+				m = ['dimage','optio','stylus'].includes(third) ? [third+model] : [model];
 			switch(model) {
 				case 'dct50':	path = 'dpreview.com/articles/0053585370/gatewaydigicams'; break;
 				case 'j1250':	path = db+'ge_j1250/'; break;
@@ -120,13 +121,10 @@ function jsonFlickrFeed(feed) {
 				case 'uca401':	m[1] = 'U-CA 401';	break;
 				case 'verve':	m[1] = 'Verve';		break;
 				case 'verves':	m[1] = 'Verve S';	break;
-				default: if (line === 'stylus') m[1] = 'µ-'+model;
+				default: if (third === 'stylus') m[1] = 'µ-'+model;
 			}
+			if (!path) path = `dpreview.com/products/${brand}/compacts/${brand==='olympus'?'oly':brand}_${m[0]}`;
 			if (!m[1]) m[1] = model.toUpperCase().replace(/^(DC|DMC|DSC|PDR)/,'$1-');
-			if (!path) {
-				path = `dpreview.com/products/${brand}/compacts/`;
-				path += (brand === 'olympus') ? 'oly_'+m[0] : brand+'_'+m[0];
-			}
 			$cam.href = 'https://www.'+path;
 			$cam.textContent = m[1];
 			switch (true) {

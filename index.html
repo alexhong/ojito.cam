@@ -36,8 +36,8 @@
 </template>
 <script>
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
-const query = window.location.search.slice(1);
-const search = (query && query.indexOf('=') < 0) ? true : false;
+const query = window.location.search.slice(1),
+      search = (query && query.indexOf('=') < 0) ? true : false;
 
 function main() {
 	if (search) {
@@ -53,8 +53,9 @@ function main() {
 }
 
 function jsonFlickrFeed(feed) {
-	const $main = document.getElementById('main');
-	const temp = document.getElementById('temp');
+	const _main = new DocumentFragment();
+	      $main = document.getElementById('main'),
+	      temp = document.getElementById('temp');
 	switch(true) {
 		case !'content' in temp: $main.innerHTML = '<p>&lt;template&gt; unsupported</p>'; return;
 		case !feed.items.length: $main.innerHTML = '<p>no results</p>'; return;
@@ -62,45 +63,47 @@ function jsonFlickrFeed(feed) {
 			document.title = 'ojito.cam: '+query;
 			document.body.className = 'search';
 	}
-	const _main = new DocumentFragment();
 	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
 	for (const item of feed.items) {
 		const $article = temp.content.children[0].cloneNode(true),
-			[$img,$perma,$at,$cam,$mod] = $article.children[0].children,
-			$p = $article.children[1],
-			$time = $perma.children[0],
-			taken = item.date_taken;
+		      [$img,$perma,$at,$cam,$mod] = $article.children[0].children,
+		      $time = $perma.children[0],
+		      taken = item.date_taken,
+		      $p = $article.children[1];
 
 		$img.src = item.media.m.slice(0,-5)+'b.jpg';
 		$perma.href = item.link;
+		if (item.title.trim()) $perma.append(' ',item.title);
 		$time.dateTime = taken;
 		$time.textContent = taken.slice(0,10).replaceAll('-','.');
 		$time.title = taken.slice(11,16);
 
 		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
-		smartquotes($p);
-		const n = $p.childNodes,
-			title = item.title.trim();
-		if (title[0] === '@') {
-			$at.href = 'https://www.instagram.com/'+title.slice(1)+'/';
-			$at.title = title;
-		} else if (title) {
-			$perma.append(' ',title);
-		} else if (n.length === 1 && n[0].tagName === 'A') {
-			$at.href = n[0].href;
-			$at.title = n[0].textContent;
-			$p.remove();
+		if ($p.textContent[0] === '@') {
+			const ig = $p.firstChild.textContent.slice(1).trim();
+			if (ig) { 
+				$at.href = `https://www.instagram.com/${ig}/`;
+				$at.title = ig;
+				$p.firstChild.remove();
+			} else {
+				$at.href = $p.childNodes[1].href;
+				$at.title = $p.childNodes[1].textContent;
+				$p.firstChild.remove();
+				$p.firstChild.remove();
+			}
+			while ($p.firstChild && ($p.firstChild.nodeName === 'BR' || $p.firstChild.nodeValue === ' ')) 
+				$p.firstChild.remove();
 		}
 
 		if (!$at.href) $at.remove();
-		if (!n.length) $p.remove();
+		$p.hasChildNodes() ? smartquotes($p) : $p.remove();
 		if (!item.tags.indexOf(' ')) {
 			$cam.remove();
 			$mod.remove();
 		} else {
 			const [model, brand, line, ...tags] = item.tags.split(' ');
 			let path = 0, db = 'digicamdb.com/specs/',
-				m = (['dimage','optio','stylus'].includes(line)) ? [line+model] : [model];
+				m = ['dimage','optio','stylus'].includes(line) ? [line+model] : [model];
 			switch(model) {
 				case 'dct50':	path = 'dpreview.com/articles/0053585370/gatewaydigicams'; break;
 				case 'j1250':	path = db+'ge_j1250/'; break;
@@ -132,8 +135,8 @@ function jsonFlickrFeed(feed) {
 	$main.append(_main);
 	if (query === '=') {
 		document.body.className = 'textarea';
-		let output = $main.innerHTML.replaceAll('&','&amp;').replaceAll('\n\t',''),
-			lines = output.split('\n').length;
+		const output = $main.innerHTML.replaceAll('&','&amp;').replaceAll('\n\t',''),
+		      lines = output.split('\n').length;
 		document.body.innerHTML = `<textarea rows="${lines}" onClick="this.setSelectionRange(0,this.value.length)">${output}</textarea>`;
 	}
 }

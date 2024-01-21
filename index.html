@@ -80,7 +80,11 @@ function jsonFlickrFeed(feed) {
 		$time.title = taken.slice(11,16);
 		if (title) $perma.append(' ',title);
 
-		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
+		$p.innerHTML = item.description
+			.split('</p>')[2].slice(4)
+			.replaceAll('="/',`="${feed.generator}/`)
+			.replace(/ ([^ <]*)$/,'&nbsp;$1')
+		;
 		if (!title && $p.textContent[0] === '@') {
 			const text = $p.firstChild.textContent.slice(1).trim(),
 				  next = $p.childNodes[1],

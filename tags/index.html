@@ -28,6 +28,7 @@ function jsonFlickrApi(obj) {
 		if (tag.count < 2 || tag._content.slice(0,3) === 'dmc')
 			continue;
 		const $li = document.createElement('li');
+		if (tag.count < 10) $li.className = 'fade';
 		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos">${tag._content}</a>`
 		_tags.append($li);
 	}

@@ -185,9 +185,12 @@ footer li {
 footer a {
 	display: block;
 	background: #404040;
-	opacity: 0.4;
+	opacity: 0.5;
 	margin: 5px;
 	padding: 6px 8px 4px;
+}
+footer .fade a {
+	opacity: 0.3;
 }
 footer a:hover,
 footer a:focus {

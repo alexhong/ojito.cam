@@ -17,7 +17,7 @@
 
 <body>
 <header>
-	<nav><input type="text" placeholder="camera,tags" onchange="window.location.href='?'+this.value"></nav>
+	<nav><input type="text" placeholder="camera,tags" onchange="window.location.href=(this.value==='tags')?'tags/':'?'+this.value"></nav>
 </header>
 <main id="main"><p>loading…</p></main>
 <footer>

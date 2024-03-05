@@ -184,7 +184,7 @@ html {
 /*---------------------------------------------*/
 
 html {
-	font: 13px/20px 'Helvetica Neue', Helvetica, sans-serif;
+	font: 13px/20px AvenirNextCondensed-Medium, sans-serif;
 	color: var(--html-c);
 	background: var(--main-bg);
 }

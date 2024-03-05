@@ -2028,6 +2028,10 @@ a.sidebtn:focus {
 	color: var(--before-c-over);
 }
 
+.escribe label.fade {
+	opacity: 0.5;
+}
+
 .escribe label.checked {
 	color: var(--lab-c-over);
 }
@@ -2058,7 +2062,7 @@ a.sidebtn:focus {
 }
 
 #plan .escribe td.acum {
-	width: 5em;
+	width: 4em;
 }
 
 /* Para que no haya saltos al marcar y desmarcar */

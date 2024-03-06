@@ -186,7 +186,7 @@ html {
 html {
 	font: 13px/20px AvenirNextCondensed-Medium, sans-serif;
 	color: var(--html-c);
-	background: var(--main-bg);
+	background: #fff;
 }
 
 a,
@@ -203,11 +203,6 @@ button,
 select,
 textarea {
 	color: var(--input-c);
-}
-
-::selection {
-	background: hsl(48, 90%, 86%);
-	text-shadow: none;
 }
 
 h1,
@@ -276,7 +271,6 @@ section {
 	justify-content: space-between;
 	align-items: flex-start;
 	row-gap: var(--big-v);
-	/*padding-block: var(--main-v);*/
 	padding: 20px;
 }
 
@@ -317,19 +311,6 @@ section.split>aside {
 /*---------------------------------------------*/
 
 /* HEADER */
-
-header {
-	cursor: default;
-	font-family: var(--ff-header);
-	background-color: #cbb;
-	background-image: url(../img/bg/wp/901b.jpg);
-	background-position: center top;
-	background-size: cover;
-}
-
-hgroup {
-	background: hsla(22.5, 40%, 85%, 0.45);
-}
 
 #h1 {
 	display: flex;
@@ -604,7 +585,7 @@ footer {
 /* MAIN */
 
 main {
-	background: var(--main-bg);
+	background: transparent;
 }
 
 
@@ -1780,6 +1761,9 @@ a.sidebtn:focus {
 }
 
 .escribe .campo label {
+	display: block;
+	padding-right: 2em;
+	margin-right: -2em;
 	align-self: flex-start;
 	font-size: var(--fs-15);
 	text-transform: uppercase;
@@ -2033,7 +2017,7 @@ a.sidebtn:focus {
 }
 
 .escribe label.checked {
-	color: var(--lab-c-over);
+	font-family: AvenirNextCondensed-Bold;
 }
 
 .escribe :is(input[type="text"], input[type="email"], input[type="date"], textarea, select):focus {
@@ -2062,7 +2046,7 @@ a.sidebtn:focus {
 }
 
 #plan .escribe td.acum {
-	width: 4em;
+	font-family: AvenirNextCondensed-Bold;
 }
 
 /* Para que no haya saltos al marcar y desmarcar */

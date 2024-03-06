@@ -271,7 +271,7 @@ section {
 	justify-content: space-between;
 	align-items: flex-start;
 	row-gap: var(--big-v);
-	padding: 20px;
+	padding: 20px 0;
 }
 
 section:not(.split) {
@@ -2046,7 +2046,7 @@ a.sidebtn:focus {
 }
 
 #plan .escribe td.acum {
-	width: 4.5em;
+	width: 4em;
 }
 
 /* Para que no haya saltos al marcar y desmarcar */
@@ -2054,7 +2054,8 @@ a.sidebtn:focus {
 	color: var(--lab-c-over);
 }
 
-#plan .escribe td.loc {
+#plan .escribe td.loc,
+#plan .escribe td.acum {
 	text-align: right !important;
 }
 

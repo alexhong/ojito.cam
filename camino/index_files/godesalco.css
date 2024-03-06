@@ -184,7 +184,7 @@ html {
 /*---------------------------------------------*/
 
 html {
-	font: 13px/20px AvenirNextCondensed-Medium, sans-serif;
+	font: 14px/20px AvenirNextCondensed-Regular, sans-serif;
 	color: var(--html-c);
 	background: #fff;
 }
@@ -1962,9 +1962,19 @@ a.sidebtn:focus {
 	color: var(--lab-c);
 }
 
-.escribe .campo td.dormir {
-	text-align: left !important
+.escribe td.dormir,
+.escribe td.dist {
+	font-size: 12px;
 } 
+
+.escribe td.text {
+	display: none;
+}
+
+.escribe td.dist,
+.escribe label.fade {
+	opacity: 0.5;
+}
 
 .escribe .campo .text input {
 	width: var(--fs-18);
@@ -2036,17 +2046,8 @@ a.sidebtn:focus {
 	cursor: default !important;
 }
 
-#plan .escribe td.text {
-	display: none;
-}
-
-#plan .escribe td.dist,
-.escribe label.fade {
-	opacity: 0.5;
-}
-
-#plan .escribe td.acum {
-	width: 4.2em;
+.escribe td.acum {
+	width: 3.6em;
 }
 
 /* Para que no haya saltos al marcar y desmarcar */
@@ -2054,8 +2055,9 @@ a.sidebtn:focus {
 	color: var(--lab-c-over);
 }
 
-#plan .escribe td.loc,
-#plan .escribe td.acum {
+.escribe td.loc,
+.escribe td.dist,
+.escribe td.acum {
 	text-align: right !important;
 }
 

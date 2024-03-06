@@ -1845,7 +1845,7 @@ a.sidebtn:focus {
 
 .escribe legend.sub {
 	text-transform: none;
-	color: var(--legend-sub-c);
+	opacity: 0.5;
 }
 
 .escribe .lista>legend:not(.sub)::before {
@@ -1958,7 +1958,6 @@ a.sidebtn:focus {
 
 .escribe .campo td {
 	padding: 0 var(--campo-pv-small);
-	text-align: right !important;
 	vertical-align: middle;
 	color: var(--lab-c);
 }
@@ -2012,12 +2011,8 @@ a.sidebtn:focus {
 	color: var(--before-c-over);
 }
 
-.escribe label.fade {
-	opacity: 0.5;
-}
-
 .escribe label.checked {
-	font-family: AvenirNextCondensed-Bold;
+	text-decoration: underline;
 }
 
 .escribe :is(input[type="text"], input[type="email"], input[type="date"], textarea, select):focus {
@@ -2045,8 +2040,13 @@ a.sidebtn:focus {
 	display: none;
 }
 
+#plan .escribe td.dist,
+.escribe label.fade {
+	opacity: 0.5;
+}
+
 #plan .escribe td.acum {
-	font-family: AvenirNextCondensed-Bold;
+	width: 4.5em;
 }
 
 /* Para que no haya saltos al marcar y desmarcar */
@@ -2055,7 +2055,7 @@ a.sidebtn:focus {
 }
 
 #plan .escribe td.loc {
-	text-align: right;
+	text-align: right !important;
 }
 
 #etapas tr:first-of-type label,

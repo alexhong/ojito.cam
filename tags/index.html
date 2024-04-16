@@ -25,7 +25,7 @@
 function jsonFlickrApi(obj) {
 	const _tags = new DocumentFragment();
 	for (const tag of obj.who.tags.tag) {
-		if (tag.count < 2 || tag._content.slice(0,3) === 'dmc')
+		if (tag.count < 2 || tag._content === 'mimi' || tag._content.slice(0,3) === 'dmc')
 			continue;
 		const $li = document.createElement('li');
 		if (tag.count < 10) $li.className = 'fade';

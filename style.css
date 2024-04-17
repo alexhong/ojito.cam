@@ -182,6 +182,11 @@ footer ul {
 footer li {
 	display: inline-block;
 }
+footer .tag_lut,
+footer .tag_mimi,
+footer li[class^='tag_dmc'] {
+	display: none;
+}
 footer a {
 	display: block;
 	background: #404040;

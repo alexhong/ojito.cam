@@ -154,8 +154,8 @@ function jsonFlickrApi(obj) {
 	const _tags = new DocumentFragment();
 	obj.who.tags.tag.sort((a,b) => b.count-a.count);
 	for (const tag of obj.who.tags.tag) {
-		if (tag._content === 'lut' || tag._content === 'mimi') continue;
 		const $li = document.createElement('li');
+		$li.className = 'tag_'+tag._content;
 		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos">${tag._content}</a>`
 		_tags.append($li);
 	}

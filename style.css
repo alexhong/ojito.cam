@@ -182,8 +182,9 @@ footer ul {
 footer li {
 	display: inline-block;
 }
+
+footer .tag_bb,
 footer .tag_lut,
-footer .tag_mimi,
 footer li[class^='tag_dmc'] {
 	display: none;
 }

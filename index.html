@@ -78,7 +78,7 @@ function jsonFlickrFeed(feed) {
 		$time.dateTime = taken;
 		$time.textContent = taken.slice(0,10).replaceAll('-','.');
 		$time.title = taken.slice(11,16);
-		if (title) $perma.append(' ',title);
+		if (title) $perma.insertAdjacentHTML('beforeend',` <cite>${title}</cite>`);
 
 		$p.innerHTML = item.description
 			.split('</p>')[2].slice(4)

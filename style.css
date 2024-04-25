@@ -148,10 +148,11 @@ div a.at {
 	float: left;
 }
 div time { display: block; }
-div a.at { margin-top: -1px; }
-div a.at,
-article p {
+div a.at { margin-top: -0.1em; }
+div cite { line-height: 0; font-style: normal; }
+div a.at, div cite, article p {
 	font-family: Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
 }
 article p {
 	clear: both;

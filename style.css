@@ -123,12 +123,11 @@ div a.at {
 	float: left;
 }
 div time { display: block; }
-div a.at { margin-top: -0.1em; }
+div a.at, div cite, 
+article p { font: 14px/20px Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+div a.at { font-size: 15px; margin-top: -2px; }
 div cite { line-height: 0; font-style: normal; }
-div a.at, div cite, article p {
-	font-family: Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 14px;
-}
+
 article p {
 	clear: both;
 	text-align: left;

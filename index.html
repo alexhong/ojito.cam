@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
-<link rel="stylesheet" href="style.css?1714107802">
+<link rel="stylesheet" href="style.css?1714137475">
 <script src="smartquotes.js"></script>
 <script>if (window.location.href.slice(-1) === '?') history.replaceState('','',window.location.pathname);</script>
 </head>
@@ -32,7 +32,8 @@
 		<a class="perma"><time datetime=""></time></a>
 		<a class="at">@</a>
 		<a class="cam"></a><a href="https://en.wikipedia.org/wiki/"></a>
-	</div><p></p></article>
+		<p></p>
+	</div></article>
 </template>
 <script>
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
@@ -67,25 +68,24 @@ function jsonFlickrFeed(feed) {
 	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
 	for (const item of feed.items) {
 		const $article = temp.content.children[0].cloneNode(true),
-			  [$img,$perma,$at,$cam,$mod] = $article.children[0].children,
+			  [$img,$perma,$at,$cam,$mod,$p] = $article.children[0].children,
 			  $time = $perma.children[0],
 			  taken = item.date_taken,
-			  title = item.title.trim(),
-			  $p = $article.children[1];
+			  title = item.title.trim();
 
 		$img.src = item.media.m.slice(0,-5)+'b.jpg';
 		$perma.href = item.link;
 		$time.dateTime = taken;
-		$time.innerHTML = taken.slice(0,10).replaceAll('-','&#8202;.&#8202;');
+		$time.innerHTML = taken.slice(0,10).replaceAll('-','.');
 		$time.title = taken.slice(11,16);
-		if (title) $perma.insertAdjacentHTML('beforeend',` <cite>${title}</cite>`);
+		if (title) $perma.append(' / '+title);
 
 		$p.innerHTML = item.description
 			.split('</p>')[2].slice(4)
 			.replaceAll('="/',`="${feed.generator}/`)
 			.replace(/ ([^ <]*)$/,'&nbsp;$1')
 		;
-		if (!title && $p.textContent[0] === '@') {
+		if ($p.textContent[0] === '@') {
 			const text = $p.firstChild.textContent.slice(1).trim(),
 				  next = $p.childNodes[1],
 				  link = next && next.nodeName === 'A';

@@ -122,10 +122,10 @@ div cite { font-style: normal; }
 article p {
 	clear: both;
 	text-align: left;
-	margin: -5px auto 25px;
+	margin: -12px auto 12px;
 	padding: 20px;
 	max-width: 360px;
-	background: linear-gradient(transparent,#707070 66%);
+	background: linear-gradient(transparent,#707070);
 	box-shadow: 0 1px 0 rgba(255,255,255,0.1);
 	border-radius: 4px;
 }

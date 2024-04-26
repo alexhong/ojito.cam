@@ -16,12 +16,11 @@ header > * { border-radius: 10px 4px 10px 4px; }
 
 body {
 	color: #c0c0c0;
-	background: #606060;
+	background: #404040;
 	font: 14px/20px Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;	
 	text-align: center;
 }
 body.search header { position: fixed; }
-body.tags { background: #404040; }
 body.textarea { padding: 20px; }
 textarea {
 	font: 10px/15px Menlo, monospace;
@@ -81,7 +80,7 @@ header a span {
 
 main {
 	position: relative;
-	background: #808080;
+	background: #606060;
 	padding: 40px 20px 60px;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
@@ -119,7 +118,7 @@ div a.at {
 div a.at { margin-top: -1px; }
 div cite { font-style: normal; }
 div a.cam,
-div a.cam+a { opacity: 0.6; }
+div a.cam+a { opacity: 0.5; }
 div a.cam+a { padding-left: 0; }
 div p { 
 	clear: both;

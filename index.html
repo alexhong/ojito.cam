@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
-<link rel="stylesheet" href="style.css?1714087701">
+<link rel="stylesheet" href="style.css?1714091583">
 <script src="smartquotes.js"></script>
 <script>if (window.location.href.slice(-1) === '?') history.replaceState('','',window.location.pathname);</script>
 </head>
@@ -22,7 +22,7 @@
 <main id="main"><p>loading…</p></main>
 <footer>
 	<h2>popular tags</h2>
-	<ul id="tags"><li><a href="tags/">.&nbsp;.&nbsp;.</a></li></ul>
+	<ul id="tags"><li><a href="tags/">etc&#8230;</a></li></ul>
 	<h2>all photos</h2>
 	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
@@ -76,7 +76,7 @@ function jsonFlickrFeed(feed) {
 		$img.src = item.media.m.slice(0,-5)+'b.jpg';
 		$perma.href = item.link;
 		$time.dateTime = taken;
-		$time.textContent = taken.slice(0,10).replaceAll('-','.');
+		$time.innerHTML = taken.slice(0,10).replaceAll('-','&thinsp;.&thinsp;');
 		$time.title = taken.slice(11,16);
 		if (title) $perma.insertAdjacentHTML('beforeend',` <cite>${title}</cite>`);
 
@@ -164,7 +164,7 @@ function jsonFlickrApi(obj) {
 
 load();
 </script>
-<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=20&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=24&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>
 
 </html>

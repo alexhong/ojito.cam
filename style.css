@@ -13,7 +13,7 @@ b, h2 { font-weight: 600; }
 a { color: inherit; text-decoration: none; }
 a:hover, a:focus { color: #fff; }
 p a { text-decoration: underline; }
-header > *, footer a { border-radius: 10px 4px 10px 4px; }
+header > * { border-radius: 10px 4px 10px 4px; }
 
 body {
 	color: #c0c0c0;
@@ -22,7 +22,7 @@ body {
 	text-align: center;
 }
 body.search header { position: fixed; }
-body.tags { background: #707070; }
+body.tags { background: #404040; }
 body.textarea { padding: 20px; }
 textarea {
 	font: 10px/15px Menlo, monospace;
@@ -47,7 +47,7 @@ nav {
 	padding: 11px 12px 9px 33px;
 	background: #404040 url(icons/icon-search.png) 10px 50% no-repeat;
 	background-size: 15px 15px;
-	opacity: 0.5;
+	opacity: 0.6;
 	box-shadow: inset 0 1px 4px rgba(0,0,0,0.2);
 }
 header input {
@@ -66,17 +66,17 @@ header a {
 	background: #000;
 	padding: 10px 11px 9px;
 	border: 1px solid #fff;
-	opacity: 0.5;
+	opacity: 0.6;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 header a:hover,
 header a:focus {
-	opacity: 0.7;
+	opacity: 0.8;
 	text-decoration: line-through;
 }
 header a span {
 	padding: 0 25px 0 0;
-	background: url(icons/icon-x.png) 100% 0 no-repeat;
+	background: url(icons/icon-x.png) 100% 1px no-repeat;
 	background-size: 15px 15px;
 }
 
@@ -132,14 +132,17 @@ article p {
 
 footer {
 	padding: 40px 0;
-	background: linear-gradient(#606060,#707070);
+	background: #404040;
+}
+footer h2,
+footer a {
+	padding: 5px 10px;
 }
 footer h2 {
-	opacity: 0.5;
 	font-size: 100%;
-	padding: 11px 0 9px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	opacity: 0.4;
 }
 footer ul {
 	max-width: 700px;
@@ -157,15 +160,13 @@ footer li[class^='tag_dmc'] {
 }
 footer a {
 	display: block;
-	background: #404040;
-	opacity: 0.5;
-	margin: 5px;
-	padding: 6px 8px 4px;
+	text-decoration: underline;
+	opacity: 0.6;
 }
 footer .fade a {
-	opacity: 0.3;
+	opacity: 0.4;
 }
 footer a:hover,
 footer a:focus {
-	opacity: 0.7;
+	opacity: 0.8;
 }

@@ -22,9 +22,9 @@
 <main id="main"><p>loading…</p></main>
 <footer>
 	<h2>top tags</h2>
-	<ul id="tags"><li><a href="tags/"><span>etc&#8230;</span></a></li></ul>
+	<ul id="tags"><li><a href="tags/">etc&#8230;</a></li></ul>
 	<h2>all photos</h2>
-	<ul><li><a href="https://flickr.com/photos/ojitocam/"><span>flickr.com/ojitocam</span></a></li></ul>
+	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
 <template id="temp">
 	<article><div>
@@ -156,7 +156,7 @@ function jsonFlickrApi(obj) {
 	for (const tag of obj.who.tags.tag) {
 		const $li = document.createElement('li');
 		$li.className = 'tag_'+tag._content;
-		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos"><span>${tag._content}</span></a>`
+		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos">${tag._content}</a>`
 		_tags.append($li);
 	}
 	document.getElementById('tags').prepend(_tags);

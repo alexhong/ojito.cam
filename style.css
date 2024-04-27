@@ -12,12 +12,12 @@
 a { color: inherit; text-decoration: none; }
 a:hover, a:focus { color: #fff; }
 p a { text-decoration: underline; }
-header > * { border-radius: 10px 4px; }
+header > * { border-radius: 10px 4px 10px 4px; }
 
 body {
 	color: #c0c0c0;
 	background: #404040;
-	font: 15px/20px Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;	
+	font: 14px/20px Rubik, 'Helvetica Neue', Helvetica, Arial, sans-serif;	
 	text-align: center;
 }
 body.search header { position: fixed; }
@@ -42,7 +42,7 @@ header {
 nav {
 	width: 100px;
 	margin: 0 auto;	
-	padding: 9px 10px 8px 33px;
+	padding: 11px 12px 9px 33px;
 	background: #404040 url(icons/icon-search.png) 10px 50% no-repeat;
 	background-size: 15px 15px;
 	opacity: 0.5;
@@ -53,16 +53,16 @@ header input {
 	color: #fff;
 	background: transparent;
 	width: 100%;
-	height: 18px;
+	height: 17px;
 	border: 0;
 	border-bottom: 1px solid;
 }
 header a {
 	position: relative;
-	top: 18px;
+	top: 20px;
 	color: #fff;
 	background: #000;
-	padding: 8px 10px;
+	padding: 10px 11px 9px;
 	border: 1px solid #fff;
 	opacity: 0.6;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.4);
@@ -73,7 +73,7 @@ header a:focus {
 	text-decoration: line-through;
 }
 header a span {
-	padding: 0 23px 0 0;
+	padding: 0 25px 0 0;
 	background: url(icons/icon-x.png) 100% 1px no-repeat;
 	background-size: 15px 15px;
 }
@@ -151,8 +151,9 @@ footer li[class^='tag_dmc'] {
 }
 footer a {
 	display: block;
-	padding: 5px 2px;
+	padding: 5px 8px;
 	opacity: 0.6;
+	text-decoration: underline;
 }
 footer .fade a {
 	opacity: 0.4;
@@ -160,9 +161,4 @@ footer .fade a {
 footer a:hover,
 footer a:focus {
 	opacity: 0.8;
-}
-footer a span {
-	background: #505050;
-	padding: 4px 8px;
-	border-radius: 5px 2px;
 }

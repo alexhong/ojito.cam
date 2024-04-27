@@ -19,7 +19,7 @@
 	<h2>all tags</h2>
 	<ul id="tags"></ul>
 	<h2>all photos</h2>
-	<ul><li><a href="https://flickr.com/photos/ojitocam/"><span>flickr.com/ojitocam</span></a></li></ul>
+	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
 <script>
 function jsonFlickrApi(obj) {
@@ -29,7 +29,7 @@ function jsonFlickrApi(obj) {
 		const $li = document.createElement('li');
 		$li.className = 'tag_'+tag._content;
 		if (tag.count < 10) $li.classList.add('fade');
-		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos"><span>${tag._content}</span></a>`
+		$li.innerHTML = `<a href="?${tag._content}" title="${tag.count} photos">${tag._content}</a>`
 		_tags.append($li);
 	}
 	document.getElementById('tags').append(_tags);

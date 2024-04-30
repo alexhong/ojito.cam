@@ -88,7 +88,7 @@ function jsonFlickrFeed(feed) {
 			if (text) {
 				$at.title = text;
 				$at.href = (text.indexOf(' ') > 0)
-					? 'https://duckduckgo.com/?q=!ducky+'+text
+					? 'https://duckduckgo.com/?q=!+'+text
 					: `https://www.instagram.com/${text}/`
 				;
 				$p.firstChild.remove();

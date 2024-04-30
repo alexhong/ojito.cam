@@ -11,7 +11,7 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
 <link rel="stylesheet" href="cps/stylesheet.css">
-<link rel="stylesheet" href="style.css?1714457058">
+<link rel="stylesheet" href="style.css?1714458840">
 </head>
 
 <body class="tags">
@@ -25,7 +25,7 @@
 function jsonFlickrApi(obj) {
 	const _tags = new DocumentFragment();
 	for (const t of obj.who.tags.tag) {
-		if (t.count < 5) continue;
+		if (t.count < 5 || t._content.slice(0,3) === 'dmc') continue;
 		const $li = document.createElement('li');
 		$li.className = '_'+t._content+(t.count<10?' fade':'');
 		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`;

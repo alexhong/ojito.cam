@@ -80,11 +80,7 @@ function jsonFlickrFeed(feed) {
 		$time.title = taken.slice(11,16);
 		if (title) $perma.append(' / '+title);
 
-		$p.innerHTML = item.description
-			.split('</p>')[2].slice(4)
-			.replaceAll('="/',`="${feed.generator}/`)
-			.replace(/ ([^ <]*)$/,'&nbsp;$1')
-		;
+		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
 		if ($p.textContent[0] === '@') {
 			const text = $p.firstChild.textContent.slice(1).trim(),
 				  next = $p.childNodes[1],
@@ -92,7 +88,7 @@ function jsonFlickrFeed(feed) {
 			if (text) {
 				$at.title = text;
 				$at.href = (text.indexOf(' ') > 0)
-					? 'https://www.google.com/search?q='+text
+					? 'https://duckduckgo.com/?q=!ducky+'+text
 					: `https://www.instagram.com/${text}/`
 				;
 				$p.firstChild.remove();

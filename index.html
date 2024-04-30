@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
-<link rel="stylesheet" href="style.css?1714458840">
+<link rel="stylesheet" href="style.css?1714457058">
 <script src="smartquotes.js"></script>
 <script>if (window.location.href.slice(-1) === '?') history.replaceState('','',window.location.pathname);</script>
 </head>
@@ -27,13 +27,13 @@
 	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
 <template id="temp">
-	<article>
+	<article><div>
 		<img alt="">
 		<a class="perma"><time datetime=""></time></a>
 		<a class="at">@</a>
 		<a class="cam"></a><a href="https://en.wikipedia.org/wiki/"></a>
 		<p></p>
-	</article>
+	</div></article>
 </template>
 <script>
 let json = 'https://www.flickr.com/services/feeds/photos_public.gne?id=185897100@N04&format=json';
@@ -68,7 +68,7 @@ function jsonFlickrFeed(feed) {
 	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
 	for (const item of feed.items) {
 		const $article = temp.content.children[0].cloneNode(true),
-			  [$img,$perma,$at,$cam,$mod,$p] = $article.children,
+			  [$img,$perma,$at,$cam,$mod,$p] = $article.children[0].children,
 			  $time = $perma.children[0],
 			  taken = item.date_taken,
 			  title = item.title.trim();
@@ -120,6 +120,7 @@ function jsonFlickrFeed(feed) {
 				case 'dscf77':	path = 'dpreview.com/articles/8424984568/sonydscf77'; break;
 				case 'j1250':	path = db+'ge_j1250/'; break;
 				case 'r827':	path = db+'hp_photosmart-r827/'; break;
+				case 'sl300rt':	path = db+'contax_sl300r-t/'; break;
 				case 'd595':	m = ['d595z','D-595']; break;
 				case 'griiix':	m[1] = 'GR IIIx';	break;
 				case 'kd300z':	m[1] = 'KD-300Z';	break;

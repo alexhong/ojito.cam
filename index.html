@@ -88,7 +88,7 @@ function jsonFlickrFeed(feed) {
 			if (text) {
 				$at.title = text;
 				$at.href = (text.indexOf(' ') > 0)
-					? 'https://duckduckgo.com/?q=!+'+text
+					? 'https://duckduckgo.com/?q='+text
 					: `https://www.instagram.com/${text}/`
 				;
 				$p.firstChild.remove();
@@ -119,6 +119,7 @@ function jsonFlickrFeed(feed) {
 				case 'd595':	m = ['d595z','D-595']; break;
 				case 'griiix':	m[1] = 'GR IIIx';	break;
 				case 'kd300z':	m[1] = 'KD-300Z';	break;
+				case 's3x': 	m[1] = 'S3x';		break;
 				case 'uca401':	m[1] = 'U-CA 401';	break;
 				case 'verve':	m[1] = 'Verve';		break;
 				case 'verves':	m[1] = 'Verve S';	break;

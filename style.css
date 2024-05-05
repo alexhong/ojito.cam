@@ -140,10 +140,6 @@ footer ul {
 footer li {
 	display: inline-block;
 }
-footer ._bb,
-footer ._lut {
-	display: none;
-}
 footer a {
 	display: block;
 	padding: 5px 8px;

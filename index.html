@@ -151,6 +151,7 @@ function jsonFlickrApi(obj) {
 	const _tags = new DocumentFragment();
 	obj.who.tags.tag.sort((a,b) => b.count-a.count);
 	for (const t of obj.who.tags.tag) {
+		if (t._content.slice(0,3) === 'dsc') continue;
 		const $li = document.createElement('li');
 		$li.className = '_'+t._content;
 		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`
@@ -161,7 +162,7 @@ function jsonFlickrApi(obj) {
 
 load();
 </script>
-<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=20&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=21&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>
 
 </html>

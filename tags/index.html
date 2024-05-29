@@ -27,7 +27,7 @@ function jsonFlickrApi(obj) {
 	for (const t of obj.who.tags.tag) {
 		if (['bb','dmc','dsc','lut'].includes(t._content.slice(0,3))) continue;
 		const $li = document.createElement('li');
-		$li.className = '_'+t._content+(t.count<10?' fade':'');
+		$li.className = (t.count<10) ? 'fade' : (t.count>49) ? 'bold' : '';
 		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`;
 		_tags.append($li);
 	}

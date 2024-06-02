@@ -16,16 +16,16 @@
 
 <body class="tags">
 <footer>
-	<h2>cities</h2>
-	<ol id="cities"></ol>
-	<h2>top tags</h2>
+	<h2>places</h2>
+	<ol id="places"></ol>
+	<h2>tags</h2>
 	<ol id="tags"></ol>
 	<h2>all photos</h2>
 	<ul><li><a href="https://flickr.com/photos/ojitocam/">flickr.com/ojitocam</a></li></ul>
 </footer>
 <script>
 function jsonFlickrApi(obj) {
-	const cities = `
+	const places = `
 		austin
 		bakersfield
 		bogota
@@ -45,21 +45,32 @@ function jsonFlickrApi(obj) {
 		sanfrancisco
 		tijuana
 		vancouver
+
+		computerhistory
+		elpasomuseumofart
+		hmns
+		justlikeheavenfest
+		mfahouston
+		museumofneonart
+		oaklandmuseumca
+		sanjosemuseumofart
+		thehuntingtonlibrary
+		wwiimuseum
 		`.split("\n\t\t");
-	const _cities = new DocumentFragment();
+	const _places = new DocumentFragment();
 	const _tags = new DocumentFragment();
 	for (const t of obj.who.tags.tag) {
-		if (t.count < 5 || ['bb','dmc','dsc','lut'].includes(t._content.slice(0,3))) continue;
+		if (['bb','dmc','dsc','lut'].includes(t._content.slice(0,3))) continue;
 		const $li = document.createElement('li');
 		$li.className = (t.count<10) ? 'fade' : (t.count>49) ? 'bold' : '';
 		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`;
-		cities.includes(t._content) ? _cities.append($li) : _tags.append($li);
+		places.includes(t._content) ? _places.append($li) : _tags.append($li);
 	}
-	document.getElementById('cities').append(_cities);
+	document.getElementById('places').append(_places);
 	document.getElementById('tags').append(_tags);
 }
 </script>
-<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=100&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=106&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>
 
 </html>

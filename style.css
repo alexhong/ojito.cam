@@ -157,3 +157,10 @@ footer a:hover,
 footer a:focus {
 	opacity: 0.8;
 }
+
+a[href^='?dmc'],
+a[href^='?dsc'],
+a[href='?lut'],
+a[href='?mimi'] {
+	display: none;
+}

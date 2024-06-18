@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/ojito-180.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="manifest" href="icons/manifest.webmanifest">
-<link rel="stylesheet" href="style.css?1717359703">
+<link rel="stylesheet" href="style.css?1718714493">
 <script src="smartquotes.js"></script>
 <script>if (window.location.href.slice(-1) === '?') history.replaceState('','',window.location.pathname);</script>
 </head>
@@ -109,13 +109,14 @@ function jsonFlickrFeed(feed) {
 			$mod.remove();
 		} else {
 			const [model, brand, third, ...tags] = item.tags.split(' ');
-			let path = 0, db = 'digicamdb.com/specs/',
+			let href = 0, path = 0,
 				m = ['dimage','optio','stylus'].includes(third) ? [third+model] : [model];
 			switch(model) {
+				case 'zd3': 	href = 'http://www.interq.or.jp/sun/tkp/digitalcamera2/Maxell%20ZD3.html'; break;
 				case 'dct50':	path = 'dpreview.com/articles/0053585370/gatewaydigicams'; break;
 				case 'dscf77':	path = 'dpreview.com/articles/8424984568/sonydscf77'; break;
-				case 'j1250':	path = db+'ge_j1250/'; break;
-				case 'r827':	path = db+'hp_photosmart-r827/'; break;
+				case 'j1250':	path = 'digicamdb.com/specs/ge_j1250/'; break;
+				case 'r827':	path = 'digicamdb.com/specs/hp_photosmart-r827/'; break;
 				case 'd595':	m = ['d595z','D-595']; break;
 				case 'griiix':	m[1] = 'GR IIIx';	break;
 				case 'kd300z':	m[1] = 'KD-300Z';	break;
@@ -126,8 +127,9 @@ function jsonFlickrFeed(feed) {
 				default: if (third === 'stylus') m[1] = 'µ-'+model;
 			}
 			if (!path) path = `dpreview.com/products/${brand}/compacts/${brand==='olympus'?'oly':brand}_${m[0]}`;
+			if (!href) href = 'https://www.'+path;
 			if (!m[1]) m[1] = model.toUpperCase().replace(/^(DC|DMC|DSC|PDR)/,'$1-');
-			$cam.href = 'https://www.'+path;
+			$cam.href = href;
 			$cam.textContent = m[1];
 			switch (true) {
 				case tags.includes('fs'): $mod.textContent = '(FS)'; $mod.href += 'Full-spectrum_photography'; break;

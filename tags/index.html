@@ -37,6 +37,7 @@ function jsonFlickrApi(obj) {
 		houston
 		juarez
 		losangeles
+		mazatlan
 		medellin
 		neworleans
 		newyork
@@ -47,16 +48,22 @@ function jsonFlickrApi(obj) {
 		vancouver
 		
 		computerhistory
+		coneyislandfun
 		elpasomuseumofart
 		hmns
+		justlikeheavenfest
 		mfahouston
 		oaklandmuseumca
 		paypalpark
+		sanjosemuseumofart
+		thehuntingtonlibrary
 		themuseumofmodernart
+		westfieldworldtradecenter
 		wwiimuseum
 		yankeestadium
 		`.split("\n\t\t");
 	for (const t of obj.who.tags.tag) {
+		if (t.count<5) continue;
 		const $li = document.createElement('li');
 		$li.className = (t.count<10) ? 'fade' : (t.count>49) ? 'bold' : '';
 		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`;
@@ -66,7 +73,7 @@ function jsonFlickrApi(obj) {
 	document.getElementById('tags').append(_tags);
 }
 </script>
-<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=100&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=128&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>
 
 </html>

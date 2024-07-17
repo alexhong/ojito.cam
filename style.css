@@ -158,9 +158,10 @@ footer a:focus {
 	opacity: 0.8;
 }
 
-a[href^='?dmc'],
-a[href^='?dsc'],
+a[href^='?dmc'], /*3*/
+a[href^='?dsc'], /*2*/
 a[href='?lut'],
-a[href='?mimi'] {
+a[href='?mimi'],
+a[href='?sofi'] {
 	display: none;
 }

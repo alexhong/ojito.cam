@@ -30,7 +30,6 @@ function jsonFlickrApi(obj) {
 		_places = new DocumentFragment(),
 		places = `
 		austin
-		bakersfield
 		bogota
 		buga
 		cali
@@ -47,9 +46,7 @@ function jsonFlickrApi(obj) {
 		pereira
 		sanantonio
 		sanfrancisco
-		tijuana
 		vancouver
-		yankeestadium
 		
 		computerhistory
 		coneyislandfun
@@ -62,7 +59,9 @@ function jsonFlickrApi(obj) {
 		paypalpark
 		sanjosemuseumofart
 		thehuntingtonlibrary
+		themuseumofmodernart
 		wwiimuseum
+		yankeestadium
 		`.split("\n\t\t");
 	for (const t of obj.who.tags.tag) {
 		const $li = document.createElement('li');

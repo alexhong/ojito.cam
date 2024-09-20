@@ -184,7 +184,7 @@ html {
 /*---------------------------------------------*/
 
 html {
-	font: 14px/20px AvenirNextCondensed-Regular, sans-serif;
+	font: 14px/20px AvenirNextCondensed-Regular, sans-serif-condensed, sans-serif;
 	color: var(--html-c);
 	background: #fff;
 }

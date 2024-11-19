@@ -161,7 +161,6 @@ footer a:focus {
 a[href^='?dmc'], /*3*/
 a[href^='?dsc'], /*2*/
 a[href='?kat'],
-a[href='?lut'],
-a[href='?sofi'] {
+a[href='?lut'] {
 	display: none;
 }

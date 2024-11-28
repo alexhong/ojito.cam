@@ -46,7 +46,7 @@ function load() {
 			? '&tagmode=all&tags='+query.replaceAll('+',',')
 			: '&tagmode=any&tags='+query
 		;
-		document.body.children[0].innerHTML = `<a href="?"><span>${query.replaceAll('%20',' ')}</span></a>`;
+		document.body.children[0].innerHTML = `<a href="?"><span>${decodeURIComponent(query)}</span></a>`;
 	}
 	const $script = document.createElement('script');
 	console.log($script.src = json);

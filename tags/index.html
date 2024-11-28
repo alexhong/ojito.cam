@@ -76,12 +76,15 @@ function jsonFlickrApi(obj) {
 		wwiimuseum
 		yankeestadium
 		`.split("\n\t\t");
+
 	for (const t of obj.who.tags.tag) {
-		if (t.count<5 || t._content[0] === '~') continue;
+		const c = t.count, tag = t._content;
+		if (tag[0] === '~' || tag[0] === '–') continue;
+
 		const $li = document.createElement('li');
-		$li.className = (t.count<10) ? 'fade' : (t.count>49) ? 'bold' : '';
-		$li.innerHTML = `<a href="?${t._content}" title="${t.count} photos">${t._content}</a>`;
-		places.includes(t._content) ? _places.append($li) : _tags.append($li);
+		$li.className = (c<10) ? 'fade' : (c>49) ? 'bold' : '';
+		$li.innerHTML = `<a href="?${tag}" title="${c} photos">${tag}</a>`;
+		places.includes(tag) ? _places.append($li) : _tags.append($li);
 	}
 	document.getElementById('places').append(_places);
 	document.getElementById('tags').append(_tags);

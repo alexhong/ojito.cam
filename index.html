@@ -82,13 +82,13 @@ function jsonFlickrFeed(feed) {
 
 		$p.innerHTML = item.description.split('</p>')[2].slice(4).replaceAll('="/',`="${feed.generator}/`);
 		if ($p.textContent[0] === '@') {
-			const text = $p.firstChild.textContent.slice(1),
+			const text = $p.firstChild.textContent.slice(1).trim(),
 				  next = $p.childNodes[1],
 				  link = next && next.nodeName === 'A';
 			if (text) {
-				$at.title = text.trim();
+				$at.title = text;
 				$at.href = (text.indexOf(' ') > 0)
-					? 'https://duckduckgo.com/?q='+text.trim()
+					? 'https://duckduckgo.com/?q='+text
 					: `https://www.instagram.com/${text}/`
 				;
 				$p.firstChild.remove();

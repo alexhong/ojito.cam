@@ -29,7 +29,9 @@ function jsonFlickrApi(obj) {
 		_places = new DocumentFragment(),
 		places = `
 		amsterdam
+		astorga
 		baltimore
+		baoding
 		barcelona
 		beijing
 		berkeley
@@ -41,21 +43,25 @@ function jsonFlickrApi(obj) {
 		chongqing
 		compostela
 		denbosch
+		denhaag
 		dublin
 		guadalajara
 		houston
+		juarez
 		lisboa
 		losangeles
 		madrid
+		mazatlan
 		medellin
-		nanjiecun
 		nanjing
 		neworleans
 		newyork
 		oakland
 		pereira
+		ponferrada
 		qingtian
 		rotterdam
+		sanantonio
 		sanfrancisco
 		suzhou
 		vancouver
@@ -63,37 +69,55 @@ function jsonFlickrApi(obj) {
 		xiamen
 		xian
 		
-		asianartmuseum
 		catedralstgo
-		computerhistory
-		hmns
-		mfahouston
-		nanjingmuseum
-		oaklandmuseumca
-		sanjosemuseumofart
-		sfmoma
-		themuseumofmodernart
+		coneyislandfun
+		justlikeheavenfest
+		kinderdijk
+		nanjiecun
+		paypalpark
+		roodkapjerotterdam
 		tiananmensquare
 		uniquehenan
+		westfieldworldtradecenter
 		wormrotterdam
-		wwiimuseum
 		yankeestadium
+		
+		asianartmuseum
+		computerhistory
+		elpasomuseumofart
+		grandcanalmuseum
+		hmns
+		mfahouston
+		museoreinasofia
+		museunacional
+		nanjingmuseum
+		nationalbuildingmuseum
+		oaklandmuseumca
+		renwickgallery
+		sanjosemuseumofart
+		sfmoma
+		thehuntingtonlibrary
+		themuseumofmodernart
+		wwiimuseum
 		`.split("\n\t\t");
 
 	for (const t of obj.who.tags.tag) {
 		const c = t.count, tag = t._content;
-		if (tag[0] === '~' || tag[0] === '–' || tag[0] === '红') continue;
-
+		if (c < 5 
+			|| tag[0] === '~' 
+			|| tag[0] === '–' 
+			|| tag[0] === '红'
+		) continue;
 		const $li = document.createElement('li');
 		$li.className = (c<10) ? 'fade' : (c>49) ? 'bold' : '';
 		$li.innerHTML = `<a href="?${tag}" title="${c} photos">${tag}</a>`;
 		places.includes(tag) ? _places.append($li) : _tags.append($li);
 	}
-	document.getElementById('places').append(_places);
 	document.getElementById('tags').append(_tags);
+	document.getElementById('places').append(_places);
 }
 </script>
-<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=128&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
+<script src="https://www.flickr.com/services/rest/?format=json&method=flickr.tags.getListUserPopular&count=200&user_id=185897100@N04&api_key=370ef6e45f168404fbcc08fc243e800e"></script>
 </body>
 
 </html>

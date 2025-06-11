@@ -24,8 +24,7 @@
 </footer>
 <script>
 function jsonFlickrApi(obj) {
-	const 
-		_tags = new DocumentFragment(),
+	const _tags = new DocumentFragment(),
 		_places = new DocumentFragment(),
 		places = `
 		amsterdam
@@ -107,13 +106,14 @@ function jsonFlickrApi(obj) {
 
 	for (const t of obj.who.tags.tag) {
 		const c = t.count, tag = t._content;
-		if (c < 5 
+		if (c<5 
 			|| tag[0] === '~' 
 			|| tag[0] === '–' 
-			|| tag[0] === '红'
+			|| tag === '红'
+			|| (tag.includes('muse') && c<10)
 		) continue;
 		const $li = document.createElement('li');
-		$li.className = (c<10) ? 'fade' : (c>49) ? 'bold' : '';
+		$li.className = c<10 ? 'fade' : c>49 ? 'bold' : '';
 		$li.innerHTML = `<a href="?${tag}" title="${c} photos">${tag}</a>`;
 		places.includes(tag) ? _places.append($li) : _tags.append($li);
 	}

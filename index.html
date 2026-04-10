@@ -62,7 +62,7 @@ function jsonFlickrFeed(feed) {
 		case !'content' in temp: $stat.textContent = '<template> unsupported'; return;
 		case !feed.items.length: $stat.textContent = 'no results'; return;
 		case search:
-			document.title = 'ojito.cam: '+query;
+			document.title = decodeURI(query)+' – ojito.cam';
 			document.body.className = 'search';
 	}
 	feed.items.sort((a,b) => Date.parse(b.date_taken)-Date.parse(a.date_taken));
